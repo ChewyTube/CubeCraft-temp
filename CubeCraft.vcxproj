@@ -142,14 +142,23 @@
   <ItemGroup>
     <ClInclude Include="Scr\Application.h" />
     <ClInclude Include="Scr\Callback.h" />
+    <ClInclude Include="Scr\Camera.h" />
+    <ClInclude Include="Scr\Config.h" />
     <ClInclude Include="Scr\Context.h" />
     <ClInclude Include="Scr\CubeCraft.h" />
     <ClInclude Include="Scr\Log\Log.h" />
     <ClInclude Include="Scr\Shader.h" />
+    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitattributes" />
+    <None Include=".gitignore" />
     <None Include="Shader\shader.frag" />
     <None Include="Shader\shader.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Texture\dirt.png" />
+    <Image Include="Resources\Texture\test.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

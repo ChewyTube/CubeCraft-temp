@@ -53,9 +53,28 @@
     <ClInclude Include="Scr\Shader.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scr\Camera.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scr\Config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\shader.vert" />
     <None Include="Shader\shader.frag" />
+    <None Include=".gitignore" />
+    <None Include=".gitattributes" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Texture\dirt.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Resources\Texture\test.png">
+      <Filter>资源文件</Filter>
+    </Image>
   </ItemGroup>
 </Project>
