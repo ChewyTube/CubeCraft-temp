@@ -16,14 +16,10 @@ namespace cubecraft {
 		CubeCraft* Instance() {
 			return this;
 		}
-		Camera* getCamera() {
-			return camera;
-		}
 	private:
 		Context m_context;
 		GLFWwindow* window;
 		Shader* shader;
-		Camera* camera;
 		GLuint VAO, VBO, texture;
 
 		float vertices[30] = {

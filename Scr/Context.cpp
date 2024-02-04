@@ -4,45 +4,6 @@
 #include "../stb_image.h"
 
 namespace cubecraft {
-    float lastX = SCR_WIDTH / 2.0f;
-    float lastY = SCR_HEIGHT / 2.0f;
-    bool firstMouse = true;
-
-    // timing
-    float deltaTime = 0.0f;	// time between current frame and last frame
-    float lastFrame = 0.0f;
-}
-
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-    glViewport(0, 0, width, height);
-}
-void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
-{
-    auto& firstMouse = cubecraft::firstMouse;
-    auto& lastX = cubecraft::lastX;
-    auto& lastY = cubecraft::lastY;
-
-    float xpos = static_cast<float>(xposIn);
-    float ypos = static_cast<float>(yposIn);
-
-    if (firstMouse)
-    {
-        lastX = xpos;
-        lastY = ypos;
-        firstMouse = false;
-    }
-
-    float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
-
-    lastX = xpos;
-    lastY = ypos;
-
-    //camera.ProcessMouseMovement(xoffset, yoffset);
-}
-
-namespace cubecraft {
     GLFWwindow* Context::initOpenGL() {
         glfwInit();
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -66,8 +27,6 @@ namespace cubecraft {
         }
 
         glfwMakeContextCurrent(window);
-        glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-        glfwSetCursorPosCallback(window, mouse_callback);
 
         //glEnable(GL_DEPTH_TEST);
 
