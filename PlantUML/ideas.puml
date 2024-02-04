@@ -1,0 +1,7 @@
+@startuml ideas
+
+object ideas{
+    +催化剂 随seed变化而出现不同的高效催化剂
+}
+
+@enduml

@@ -1,0 +1,48 @@
+@startuml CubeCraft 
+
+class Application{
+    + void run() 调用 m_CubeCraft进行Init Loop Quit
+    - cubecraft::CubeCraft m_CubeCraft
+}
+
+class CubeCraft{
+    + void Init() 初始化
+    + void Loop() 渲染循环
+    + void Quit() 退出
+
+    - Context m_context     上下文实例
+    - GLFWwindow* window    OpenGL窗口
+    - Shader* shader        着色器实例
+    - GLuint VAO, VBO       OpenGL VAO/VBO
+     
+    - float vertices[9] = 
+    {0.5f, -0.5f, 0.0f,0.5f, -0.5f, 0.0f,0.0f,  0.5f, 0.0f}
+}
+
+class Context{
+    + GLFWwindow* initOpenGL()  初始化OpenGL
+    + Shader* buildShader(std::string vertPath, std::string fragPath)   构建着色器
+    + std::pair<int, int> buildVBO_VAO(float* vertices, int size)       构建VBO/VAO
+
+    - const unsigned int SCR_WIDTH = 800
+    - const unsigned int SCR_HEIGHT = 600
+}
+
+Context --> CubeCraft
+CubeCraft -> Application
+
+object main{
+    主函数
+}
+object Shader{
+    着色器类
+}
+object Log{
+    日志相关
+}
+
+Application -> main
+Shader -> Context
+Log -left-> Context
+
+@enduml

@@ -1,0 +1,20 @@
+@startuml sequence
+
+main -> Application : run()
+Application -> CubeCraft : Init()
+CubeCraft -> Context : initOpenGL() 
+Context -> CubeCraft : GLFWwindow* window
+|||
+CubeCraft -> Context : buildVBO_VAO(float* vertices,\n int size)
+Context -> CubeCraft : Gluint { VBO , VAO }
+|||
+CubeCraft -> Context : buildShader(std::string path)
+Context -> Shader : 着色器路径 v/f
+Shader -> Context : Shader shader
+Context -> CubeCraft : Shader* shader
+|||
+CubeCraft -> CubeCraft : Loop() 渲染
+CubeCraft -> CubeCraft : Quit() 退出
+CubeCraft --> Application
+Application --> main
+@enduml
