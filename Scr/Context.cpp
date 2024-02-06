@@ -37,7 +37,6 @@ namespace cubecraft {
         auto shader = new Shader(vertPath.c_str(), fragPath.c_str());
         return shader;
     }
-
     std::pair<int, int> Context::buildVBO_VAO(float* vertices, int size) {
         unsigned int VBO, VAO;
         glGenVertexArrays(1, &VAO);
@@ -59,33 +58,7 @@ namespace cubecraft {
 
         return { VBO, VAO };
     }
-    /*
-    int Context::buildVAO() {
-        unsigned int VAO;
 
-
-        glGenVertexArrays(1, &VAO);
-        glBindVertexArray(VAO);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-        glEnableVertexAttribArray(0);
-
-        glBindVertexArray(0);
-
-        return VAO;
-    }
-    */
-    
-    void Context::initTexture() {
-        // 环绕方式
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
-        // 纹理过滤
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        // 多级渐近纹理
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    }
     GLuint Context::LoadTexture(std::string filePath) {
         unsigned int texture;
         glGenTextures(1, &texture);

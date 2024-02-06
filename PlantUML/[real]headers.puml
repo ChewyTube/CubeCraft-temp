@@ -1,0 +1,57 @@
+@startuml headers 
+
+object main{
+    主函数
+}
+object Application{
+    应用层
+}
+object CubeCraft{
+    CubeCraft
+}
+object Context{
+    上下文
+}
+
+object Camera{
+    摄像机
+}
+object Shader{
+    着色器加载
+}
+
+object Log{
+    日志输出
+}
+object Config{
+    相关配置
+}
+
+object glm{
+    #include <glm/glm.hpp>
+    #include <glm/gtc/matrix_transform.hpp>
+    #include <glm/gtc/type_ptr.hpp>
+}
+object GLFW_GLAD{
+    #include <glad/glad.h>
+    #include <GLFW/glfw3.h> 
+}
+
+'object iostream{
+'    I/O
+'}
+
+Application --> main
+CubeCraft --> Application
+
+Camera --> CubeCraft
+glm --> CubeCraft
+Config -> CubeCraft
+
+GLFW_GLAD --> Context
+Shader --> Context
+Log -left-> Context
+CubeCraft --> Context
+'Context .left> Application
+
+@enduml

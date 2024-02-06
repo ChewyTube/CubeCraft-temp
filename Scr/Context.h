@@ -3,8 +3,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
-#include <iostream>
-
 #include "Log/Log.h"
 #include "Shader.h"
 #include "Config.h"
@@ -22,7 +20,5 @@ namespace cubecraft {
 		GLuint LoadTexture(std::string filePath);
 		//int buildVAO();
 	private:
-		const unsigned int SCR_WIDTH = 800;
-		const unsigned int SCR_HEIGHT = 600;
 	};
 }
