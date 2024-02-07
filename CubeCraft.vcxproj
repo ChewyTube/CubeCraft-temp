@@ -138,6 +138,7 @@
     <ClCompile Include="Scr\Context.cpp" />
     <ClCompile Include="Scr\CubeCraft.cpp" />
     <ClCompile Include="Scr\Log\Log.cpp" />
+    <ClCompile Include="Scr\Texture\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scr\Application.h" />
@@ -147,7 +148,9 @@
     <ClInclude Include="Scr\Context.h" />
     <ClInclude Include="Scr\CubeCraft.h" />
     <ClInclude Include="Scr\Log\Log.h" />
+    <ClInclude Include="Scr\Renderer\Renderer.h" />
     <ClInclude Include="Scr\Shader.h" />
+    <ClInclude Include="Scr\Texture\Texture.h" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,5 @@
 #include "Context.h"
 
-#define STB_IMAGE_IMPLEMENTATION
-#include "../stb_image.h"
-
 namespace cubecraft {
     GLFWwindow* Context::initOpenGL() {
         glfwInit();
@@ -47,9 +44,9 @@ namespace cubecraft {
         glBindBuffer(GL_ARRAY_BUFFER, VBO);
         glBufferData(GL_ARRAY_BUFFER, size, vertices, GL_STATIC_DRAW);
 
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)0);
         glEnableVertexAttribArray(0);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(sizeof(float)*3));
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void*)(sizeof(GLfloat)*3));
         glEnableVertexAttribArray(1);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -58,30 +55,58 @@ namespace cubecraft {
 
         return { VBO, VAO };
     }
+    GLuint Context::buildVBO(GLfloat* data, GLint size) {
+        GLuint VBO;
 
-    GLuint Context::LoadTexture(std::string filePath) {
-        unsigned int texture;
-        glGenTextures(1, &texture);
-        glBindTexture(GL_TEXTURE_2D, texture);
-        // 为当前绑定的纹理对象设置环绕、过滤方式
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        // 加载并生成纹理
-        int width, height, nrChannels;
-        unsigned char* data = stbi_load(filePath.c_str(), &width, &height, &nrChannels, 0);
-        if (data)
-        {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-            glGenerateMipmap(GL_TEXTURE_2D);
-        }
-        else
-        {
-            outputLog("Failed to load texture");
-        }
-        stbi_image_free(data);
+        glGenBuffers(1, &VBO);
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
-        return texture;
+        glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        return VBO;
+    }
+    GLuint Context::buildVAO(GLuint VerticesVBO, GLuint TextureVBO) {
+        // @TODO 完善函数
+        // 参数说明：
+        // num: VBO的个数
+        // VBOs: 一个无符号整数数组，存储每个VBO的ID
+        // attribs: 一个整数数组，存储每个VBO对应的顶点属性的位置（location）
+        // components: 一个整数数组，存储每个顶点属性的分量个数
+        // stride: 一个整数数组，存储每个顶点属性的步长（字节为单位）
+        // offset: 一个整数数组，存储每个顶点属性的偏移量（字节为单位）
+
+        GLuint VAO;
+
+        glGenVertexArrays(1, &VAO);
+        glBindVertexArray(VAO);
+
+        glEnableVertexAttribArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, VerticesVBO);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+        glEnableVertexAttribArray(1);
+        glBindBuffer(GL_ARRAY_BUFFER, TextureVBO);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+        glBindVertexArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        return VAO;
+    }
+    GLuint Context::buildEBO(GLuint* indices, GLint size, GLuint VAO) {
+        GLuint EBO;
+
+        glGenBuffers(1, &EBO);
+        glBindVertexArray(VAO);
+
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_STATIC_DRAW);
+
+        glBindVertexArray(0);
+        //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+        return EBO;
     }
 }

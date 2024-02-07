@@ -69,14 +69,22 @@ namespace cubecraft {
 
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-		auto result = m_context.buildVBO_VAO(vertices, sizeof(vertices));
-		VBO = result.first;
-		VAO = result.second;
+		//auto result = m_context.buildVBO_VAO(vertices, sizeof(vertices));
+		//VBO = result.first;
+		//VAO = result.second;
+		//VBO = m_context.buildVBO(frontFace, sizeof(frontFace));
+
+		//GLfloat verticesData[12] = frontFace;
+
+		TextureVBO = m_context.buildVBO(textureIndices, sizeof(textureIndices));
+		VerticesVBO = m_context.buildVBO(topFace, sizeof(topFace));
+
+		VAO = m_context.buildVAO(VerticesVBO, TextureVBO);
+		EBO = m_context.buildEBO(indices, sizeof(indices), VAO);
+
 		shader = m_context.buildShader("Shader/shader.vert", "Shader/shader.frag");
 
-		//m_context.initTexture();
-		texture = m_context.LoadTexture("Resources/Texture/dirt.png");
-		
+		texture = LoadTexture("Resources/Texture/dirt.png");
 	}
 	void CubeCraft::Loop() {
 		while (!glfwWindowShouldClose(window)){
@@ -101,7 +109,9 @@ namespace cubecraft {
 			shader->setMat4("model", model);
 
 			glBindVertexArray(VAO);
-			glDrawArrays(GL_TRIANGLES, 0, 6);
+			//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+			//glDrawArrays(GL_TRIANGLES, 0, 6);
 
 			glfwSwapBuffers(window);
 			glfwPollEvents();
@@ -110,6 +120,7 @@ namespace cubecraft {
 	void CubeCraft::Quit() {
 		glDeleteVertexArrays(1, &VAO);
 		glDeleteBuffers(1, &VBO);
+		glDeleteBuffers(1, &EBO);
 
 		glfwTerminate();
 	}

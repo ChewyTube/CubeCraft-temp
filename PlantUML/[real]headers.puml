@@ -37,9 +37,9 @@ object GLFW_GLAD{
     #include <GLFW/glfw3.h> 
 }
 
-'object iostream{
-'    I/O
-'}
+object Texture{
+    加载纹理
+}
 
 Application --> main
 CubeCraft --> Application
@@ -47,11 +47,14 @@ CubeCraft --> Application
 Camera --> CubeCraft
 glm --> CubeCraft
 Config -> CubeCraft
+Texture --> CubeCraft
 
 GLFW_GLAD --> Context
 Shader --> Context
 Log -left-> Context
 CubeCraft --> Context
-'Context .left> Application
+
+GLFW_GLAD --> Texture
+Log --> Texture
 
 @enduml

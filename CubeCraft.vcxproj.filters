@@ -33,6 +33,9 @@
     <ClCompile Include="Scr\CubeCraft.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Scr\Texture\Texture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scr\Application.h">
@@ -60,6 +63,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Scr\Config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scr\Texture\Texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scr\Renderer\Renderer.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

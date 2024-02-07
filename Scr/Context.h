@@ -15,10 +15,9 @@ namespace cubecraft {
 		Shader* buildShader(std::string vertPath, std::string fragPath);
 		std::pair<int, int> buildVBO_VAO(float* vertices, int size);
 
-		// @TODO 分离函数至新的头文件
-		void initTexture();
-		GLuint LoadTexture(std::string filePath);
-		//int buildVAO();
+		GLuint buildVBO(GLfloat* data, GLint size);
+		GLuint buildVAO(GLuint VerticesVBO, GLuint TextureVBO);
+		GLuint buildEBO(GLuint* indices, GLint size, GLuint VAO);
 	private:
 	};
 }
