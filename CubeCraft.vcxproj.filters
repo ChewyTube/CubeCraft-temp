@@ -36,6 +36,21 @@
     <ClCompile Include="Scr\Texture\Texture.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Scr\Renderer\Renderer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Scr\World\Chunk\Chunk.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Scr\World\Chunk\ChunkMeshBuilder.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Scr\World\Chunk\VerticesData.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Scr\World\Chunk\Mesh.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scr\Application.h">
@@ -45,9 +60,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Scr\Context.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Scr\Callback.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Scr\Log\Log.h">
@@ -69,6 +81,21 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Scr\Renderer\Renderer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scr\World\Chunk\Chunk.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scr\Maths\Croods.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scr\World\Chunk\ChunkMeshBuilder.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scr\World\Chunk\VerticesData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scr\World\Chunk\Mesh.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

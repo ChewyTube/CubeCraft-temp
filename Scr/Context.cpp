@@ -1,4 +1,4 @@
-#include "Context.h"
+ï»¿#include "Context.h"
 
 namespace cubecraft {
     GLFWwindow* Context::initOpenGL() {
@@ -24,8 +24,6 @@ namespace cubecraft {
         }
 
         glfwMakeContextCurrent(window);
-
-        //glEnable(GL_DEPTH_TEST);
 
         return window;
 	}
@@ -68,14 +66,14 @@ namespace cubecraft {
         return VBO;
     }
     GLuint Context::buildVAO(GLuint VerticesVBO, GLuint TextureVBO) {
-        // @TODO ÍêÉÆº¯Êı
-        // ²ÎÊıËµÃ÷£º
-        // num: VBOµÄ¸öÊı
-        // VBOs: Ò»¸öÎŞ·ûºÅÕûÊıÊı×é£¬´æ´¢Ã¿¸öVBOµÄID
-        // attribs: Ò»¸öÕûÊıÊı×é£¬´æ´¢Ã¿¸öVBO¶ÔÓ¦µÄ¶¥µãÊôĞÔµÄÎ»ÖÃ£¨location£©
-        // components: Ò»¸öÕûÊıÊı×é£¬´æ´¢Ã¿¸ö¶¥µãÊôĞÔµÄ·ÖÁ¿¸öÊı
-        // stride: Ò»¸öÕûÊıÊı×é£¬´æ´¢Ã¿¸ö¶¥µãÊôĞÔµÄ²½³¤£¨×Ö½ÚÎªµ¥Î»£©
-        // offset: Ò»¸öÕûÊıÊı×é£¬´æ´¢Ã¿¸ö¶¥µãÊôĞÔµÄÆ«ÒÆÁ¿£¨×Ö½ÚÎªµ¥Î»£©
+        // @TODO å®Œå–„å‡½æ•°
+        // å‚æ•°è¯´æ˜ï¼š
+        // num: VBOçš„ä¸ªæ•°
+        // VBOs: ä¸€ä¸ªæ— ç¬¦å·æ•´æ•°æ•°ç»„ï¼Œå­˜å‚¨æ¯ä¸ªVBOçš„ID
+        // attribs: ä¸€ä¸ªæ•´æ•°æ•°ç»„ï¼Œå­˜å‚¨æ¯ä¸ªVBOå¯¹åº”çš„é¡¶ç‚¹å±æ€§çš„ä½ç½®ï¼ˆlocationï¼‰
+        // components: ä¸€ä¸ªæ•´æ•°æ•°ç»„ï¼Œå­˜å‚¨æ¯ä¸ªé¡¶ç‚¹å±æ€§çš„åˆ†é‡ä¸ªæ•°
+        // stride: ä¸€ä¸ªæ•´æ•°æ•°ç»„ï¼Œå­˜å‚¨æ¯ä¸ªé¡¶ç‚¹å±æ€§çš„æ­¥é•¿ï¼ˆå­—èŠ‚ä¸ºå•ä½ï¼‰
+        // offset: ä¸€ä¸ªæ•´æ•°æ•°ç»„ï¼Œå­˜å‚¨æ¯ä¸ªé¡¶ç‚¹å±æ€§çš„åç§»é‡ï¼ˆå­—èŠ‚ä¸ºå•ä½ï¼‰
 
         GLuint VAO;
 

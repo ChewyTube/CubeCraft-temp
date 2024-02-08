@@ -1,4 +1,4 @@
-#include "CubeCraft.h"
+﻿#include "CubeCraft.h"
 
 namespace cubecraft {
 	Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
@@ -64,27 +64,35 @@ namespace cubecraft {
 	void CubeCraft::Init() {
 		window = m_context.initOpenGL();
 
+		glEnable(GL_DEPTH_TEST);
+
 		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 		glfwSetCursorPosCallback(window, mouse_callback);
 
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-		//auto result = m_context.buildVBO_VAO(vertices, sizeof(vertices));
-		//VBO = result.first;
-		//VAO = result.second;
-		//VBO = m_context.buildVBO(frontFace, sizeof(frontFace));
+		for (int x = 0; x < 16; x++) {
+			for (int y = 0; y < 16; y++) {
+				BlockCroodInChunk c(x, y, 0);
+				chunk.setBlock(c, 1);
+			}
+		}
 
-		//GLfloat verticesData[12] = frontFace;
+		auto textureIndices = chunk.getMesh().getTex_Indices();
+		auto vertices = chunk.getMesh().getVertices();
+		auto verticesIndices = chunk.getMesh().getVer_Indices();
 
-		TextureVBO = m_context.buildVBO(textureIndices, sizeof(textureIndices));
-		VerticesVBO = m_context.buildVBO(topFace, sizeof(topFace));
+		TextureVBO = m_context.buildVBO(_textureIndices, sizeof(_textureIndices));
+		VerticesVBO = m_context.buildVBO(_topFace, sizeof(_topFace));
 
 		VAO = m_context.buildVAO(VerticesVBO, TextureVBO);
-		EBO = m_context.buildEBO(indices, sizeof(indices), VAO);
+		EBO = m_context.buildEBO(_indices, sizeof(_indices), VAO);
 
 		shader = m_context.buildShader("Shader/shader.vert", "Shader/shader.frag");
 
 		texture = LoadTexture("Resources/Texture/dirt.png");
+
+		
 	}
 	void CubeCraft::Loop() {
 		while (!glfwWindowShouldClose(window)){
@@ -94,27 +102,29 @@ namespace cubecraft {
 
 			processInput(window);
 
-			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-			glClear(GL_COLOR_BUFFER_BIT);
+			renderer.startRender();
 
 			glBindTexture(GL_TEXTURE_2D, texture);
 
+			// 为方便调试
+			//renderer.render(shader, camera, VAO);
 			shader->use();
 
 			glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, near, far);
 			shader->setMat4("projection", projection);
 			glm::mat4 view = camera.GetViewMatrix();
 			shader->setMat4("view", view);
-			glm::mat4 model = glm::mat4(1.0f);
-			shader->setMat4("model", model);
 
-			glBindVertexArray(VAO);
-			//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-			//glDrawArrays(GL_TRIANGLES, 0, 6);
-
-			glfwSwapBuffers(window);
-			glfwPollEvents();
+			auto& data = chunk.getBlockData();
+			for (auto& block : data) {
+				glm::mat4 model = glm::mat4(1.0f);
+				model = glm::translate(model, { block.first.x, block.first.y, block.first.z });
+				shader->setMat4("model", model);
+				glBindVertexArray(VAO);
+				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+			}
+			// -------------------------------------------
+			renderer.endRender(window);
 		}
 	}
 	void CubeCraft::Quit() {

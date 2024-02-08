@@ -28,17 +28,21 @@ object Config{
 }
 
 object glm{
-    #include <glm/glm.hpp>
-    #include <glm/gtc/matrix_transform.hpp>
-    #include <glm/gtc/type_ptr.hpp>
+    线性代数库
 }
 object GLFW_GLAD{
-    #include <glad/glad.h>
-    #include <GLFW/glfw3.h> 
+    你懂的
 }
 
 object Texture{
     加载纹理
+}
+
+object Renderer{
+    渲染相关
+}
+object Chunk{
+    区块
 }
 
 Application --> main
@@ -48,6 +52,7 @@ Camera --> CubeCraft
 glm --> CubeCraft
 Config -> CubeCraft
 Texture --> CubeCraft
+Renderer -left-> CubeCraft
 
 GLFW_GLAD --> Context
 Shader --> Context

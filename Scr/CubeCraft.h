@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "Context.h"
 #include "Camera.h"
@@ -8,7 +8,9 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include "Texture/Texture.h"
-//#include "Renderer/Renderer.h"
+#include "Renderer/Renderer.h"
+
+#include "World/Chunk/Chunk.h"
 
 namespace cubecraft {
 	class CubeCraft {
@@ -23,10 +25,13 @@ namespace cubecraft {
 		Context m_context;
 		GLFWwindow* window;
 		Shader* shader;
+		Renderer renderer;
 		GLuint VAO, VBO, EBO, texture;
 		GLuint VerticesVBO, TextureVBO;
+		Chunk chunk;
 
-		float vertices[30] = {
+		// from https://github.com/Hopson97/MineCraft-One-Week-Challenge.git
+		float _vertices[30] = {
 			1.0f, 1.0f, 0.0f,     1.0f, 1.0f, // top right
 			1.0f, 0.0f, 0.0f,     1.0f, 0.0f, // bottom right
 			0.0f, 0.0f, 0.0f,     0.0f, 0.0f, // bottom left
@@ -34,29 +39,29 @@ namespace cubecraft {
 			1.0f, 1.0f, 0.0f,     1.0f, 1.0f, // top right
 			0.0f, 0.0f, 0.0f,     0.0f, 0.0f, // bottom left
 		};
-		GLuint indices[6]{
+		GLuint _indices[6]{
 			0, 1, 3,
 			1, 2, 3,
 		};
-		GLfloat frontFace[12]{
+		GLfloat _frontFace[12]{
 			0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 
 		};
-		GLfloat backFace[12]{
+		GLfloat _backFace[12]{
 			1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0,
 		};
-		GLfloat leftFace[12]{
+		GLfloat _leftFace[12]{
 			0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0,
 		};
-		GLfloat rightFace[12]{
+		GLfloat _rightFace[12]{
 			1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1,
 		};
-		GLfloat topFace[12]{
+		GLfloat _topFace[12]{
 			0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0,
 		};
-		GLfloat bottomFace[12]{
+		GLfloat _bottomFace[12]{
 			0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1,
 		};
-		GLfloat textureIndices[8] = {
+		GLfloat _textureIndices[8] = {
 			0, 0, 1, 0, 1, 1, 0, 1,
 		};
 	};

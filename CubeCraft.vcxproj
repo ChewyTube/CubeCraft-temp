@@ -132,25 +132,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Scr\World\Chunk\ChunkMeshBuilder.cpp" />
     <ClCompile Include="D:\C++\CubeCraft\Cubecraft\glad.c" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Scr\Application.cpp" />
     <ClCompile Include="Scr\Context.cpp" />
     <ClCompile Include="Scr\CubeCraft.cpp" />
     <ClCompile Include="Scr\Log\Log.cpp" />
+    <ClCompile Include="Scr\Renderer\Renderer.cpp" />
     <ClCompile Include="Scr\Texture\Texture.cpp" />
+    <ClCompile Include="Scr\World\Chunk\Chunk.cpp" />
+    <ClCompile Include="Scr\World\Chunk\Mesh.cpp" />
+    <ClCompile Include="Scr\World\Chunk\VerticesData.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scr\World\Chunk\ChunkMeshBuilder.h" />
     <ClInclude Include="Scr\Application.h" />
-    <ClInclude Include="Scr\Callback.h" />
     <ClInclude Include="Scr\Camera.h" />
     <ClInclude Include="Scr\Config.h" />
     <ClInclude Include="Scr\Context.h" />
     <ClInclude Include="Scr\CubeCraft.h" />
     <ClInclude Include="Scr\Log\Log.h" />
+    <ClInclude Include="Scr\Maths\Croods.h" />
     <ClInclude Include="Scr\Renderer\Renderer.h" />
     <ClInclude Include="Scr\Shader.h" />
     <ClInclude Include="Scr\Texture\Texture.h" />
+    <ClInclude Include="Scr\World\Chunk\Chunk.h" />
+    <ClInclude Include="Scr\World\Chunk\Mesh.h" />
+    <ClInclude Include="Scr\World\Chunk\VerticesData.h" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>

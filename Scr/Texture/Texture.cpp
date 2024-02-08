@@ -1,4 +1,4 @@
-#include "Texture.h"
+ï»¿#include "Texture.h"
 
 #include "../Log/Log.h"
 
@@ -10,12 +10,12 @@ namespace cubecraft {
         unsigned int texture;
         glGenTextures(1, &texture);
         glBindTexture(GL_TEXTURE_2D, texture);
-        // Îªµ±Ç°°ó¶¨µÄÎÆÀí¶ÔÏóÉèÖÃ»·ÈÆ¡¢¹ıÂË·½Ê½
+        // ä¸ºå½“å‰ç»‘å®šçš„çº¹ç†å¯¹è±¡è®¾ç½®ç¯ç»•ã€è¿‡æ»¤æ–¹å¼
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        // ¼ÓÔØ²¢Éú³ÉÎÆÀí
+        // åŠ è½½å¹¶ç”Ÿæˆçº¹ç†
         int width, height, nrChannels;
         unsigned char* data = stbi_load(filePath.c_str(), &width, &height, &nrChannels, 0);
         if (data)
