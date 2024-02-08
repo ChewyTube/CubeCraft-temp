@@ -1,4 +1,4 @@
-ï»¿#pragma once
+#pragma once
 
 #include "VerticesData.h"
 
@@ -22,7 +22,7 @@ namespace cubecraft {
 		front,
 		back,
 	};
-	// è·å–ç›¸é‚»åæ ‡
+	// »ñÈ¡ÏàÁÚ×ø±ê
 	struct Adjacent
 	{
 		int x, y, z;
@@ -30,7 +30,7 @@ namespace cubecraft {
 		void update(BlockCroodInChunk p) {
 			x = p.x; 
 			y = p.y; 
-			z = p.z;//åˆ·æ–°xyzæ•°æ®
+			z = p.z;//Ë¢ĞÂxyzÊı¾İ
 
 			up = { x, y + 1 , z };
 			down = { x, y - 1 , z };

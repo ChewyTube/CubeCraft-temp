@@ -65,6 +65,7 @@ namespace cubecraft {
 		window = m_context.initOpenGL();
 
 		glEnable(GL_DEPTH_TEST);
+		glEnable(GL_CULL_FACE);
 
 		glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 		glfwSetCursorPosCallback(window, mouse_callback);
@@ -73,26 +74,27 @@ namespace cubecraft {
 
 		for (int x = 0; x < 16; x++) {
 			for (int y = 0; y < 16; y++) {
-				BlockCroodInChunk c(x, y, 0);
-				chunk.setBlock(c, 1);
+				for (int z = 0; z < 16; z++) {
+
+					BlockCroodInChunk c(x, y, z);
+					chunk.setBlock(c, 1);
+				}
 			}
 		}
-
+		chunk.buildMesh();
 		auto textureIndices = chunk.getMesh().getTex_Indices();
 		auto vertices = chunk.getMesh().getVertices();
 		auto verticesIndices = chunk.getMesh().getVer_Indices();
 
-		TextureVBO = m_context.buildVBO(_textureIndices, sizeof(_textureIndices));
-		VerticesVBO = m_context.buildVBO(_topFace, sizeof(_topFace));
+		TextureVBO = m_context.buildVBO(textureIndices.data(), textureIndices.size()*sizeof(GLuint));
+		VerticesVBO = m_context.buildVBO(vertices.data(), vertices.size()*sizeof(GLfloat));
 
 		VAO = m_context.buildVAO(VerticesVBO, TextureVBO);
-		EBO = m_context.buildEBO(_indices, sizeof(_indices), VAO);
+		EBO = m_context.buildEBO(verticesIndices.data(), verticesIndices.size()*sizeof(GLuint), VAO);
 
 		shader = m_context.buildShader("Shader/shader.vert", "Shader/shader.frag");
 
 		texture = LoadTexture("Resources/Texture/dirt.png");
-
-		
 	}
 	void CubeCraft::Loop() {
 		while (!glfwWindowShouldClose(window)){
@@ -115,7 +117,8 @@ namespace cubecraft {
 			glm::mat4 view = camera.GetViewMatrix();
 			shader->setMat4("view", view);
 
-			auto& data = chunk.getBlockData();
+			//auto& data = chunk.getBlockData();
+			/*
 			for (auto& block : data) {
 				glm::mat4 model = glm::mat4(1.0f);
 				model = glm::translate(model, { block.first.x, block.first.y, block.first.z });
@@ -123,6 +126,13 @@ namespace cubecraft {
 				glBindVertexArray(VAO);
 				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 			}
+			*/
+
+			auto points = chunk.getMesh().getVertices().size();
+			glm::mat4 model = glm::mat4(1.0f);
+			shader->setMat4("model", model);
+			glBindVertexArray(VAO);
+			glDrawElements(GL_TRIANGLES, points/2, GL_UNSIGNED_INT, 0);
 			// -------------------------------------------
 			renderer.endRender(window);
 		}

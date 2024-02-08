@@ -75,17 +75,19 @@ namespace cubecraft {
 		default:
 			break;
 		}
-		vIndices.insert(vIndices.begin(), blockIndices.begin(), blockIndices.end());
-		tIndices.insert(tIndices.begin(), textureIndices.begin(), textureIndices.end());
+		vIndices.insert(vIndices.end(), blockIndices.begin(), blockIndices.end());
+		tIndices.insert(tIndices.end(), textureIndices.begin(), textureIndices.end());
 		// 调整索引
 		for (int i = 0; i < 12; i++) {
-			(vertices.end() - i) += 12 * addedFaces;
+			if (i % 3 == 0) { vertices[vertices.size() - 12 + i] += (pos.x - 1); }
+			if (i % 3 == 1) { vertices[vertices.size() - 12 + i] += (pos.y - 1); }
+			if (i % 3 == 2) { vertices[vertices.size() - 12 + i] += (pos.z - 1); }
 		}
 		for (int i = 0; i < 6; i++) {
-			(vIndices.end() - i) += 6 * addedFaces;
+			vIndices[vIndices.size() - i - 1] += 4 * addedFaces;
 		}
 		for (int i = 0; i < 8; i++) {
-			(tIndices.end() - i) += 8 * addedFaces;
+			//tIndices[tIndices.size() - i - 1] += 2 * addedFaces;
 		}
 
 		addedFaces++;

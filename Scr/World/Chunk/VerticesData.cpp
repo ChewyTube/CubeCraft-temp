@@ -5,10 +5,10 @@ namespace cubecraft {
 		0, 1, 3,
 		1, 2, 3,
 	};
-	std::array<GLfloat, 12> frontFace = {
+	std::array<GLfloat, 12> backFace = {
 		0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1,
 	};
-	std::array<GLfloat, 12> backFace = {
+	std::array<GLfloat, 12> frontFace = {
 		1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0,
 	};
 	std::array<GLfloat, 12> leftFace = {

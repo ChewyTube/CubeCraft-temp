@@ -32,6 +32,8 @@ namespace cubecraft {
         auto shader = new Shader(vertPath.c_str(), fragPath.c_str());
         return shader;
     }
+    /*
+    
     std::pair<int, int> Context::buildVBO_VAO(float* vertices, int size) {
         unsigned int VBO, VAO;
         glGenVertexArrays(1, &VAO);
@@ -53,7 +55,20 @@ namespace cubecraft {
 
         return { VBO, VAO };
     }
+    */
     GLuint Context::buildVBO(GLfloat* data, GLint size) {
+        GLuint VBO;
+
+        glGenBuffers(1, &VBO);
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+        glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        return VBO;
+    }
+    GLuint Context::buildVBO(GLuint* data, GLint size) {
         GLuint VBO;
 
         glGenBuffers(1, &VBO);
@@ -86,7 +101,7 @@ namespace cubecraft {
 
         glEnableVertexAttribArray(1);
         glBindBuffer(GL_ARRAY_BUFFER, TextureVBO);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+        glVertexAttribPointer(1, 2, GL_UNSIGNED_INT, GL_FALSE, 0, (void*)0);
 
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
