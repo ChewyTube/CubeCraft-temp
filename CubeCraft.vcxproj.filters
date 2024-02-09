@@ -104,6 +104,10 @@
     <None Include="Shader\shader.frag" />
     <None Include=".gitignore" />
     <None Include=".gitattributes" />
+    <None Include="PlantUML\[image]headers.puml" />
+    <None Include="PlantUML\[real]headers.puml" />
+    <None Include="PlantUML\ideas.puml" />
+    <None Include="PlantUML\sequence.puml" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Texture\dirt.png">

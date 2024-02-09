@@ -3,63 +3,96 @@
 object main{
     主函数
 }
-object Application{
-    应用层
-}
-object CubeCraft{
-    CubeCraft
-}
-object Context{
-    上下文
+
+package Enviroment{
+    object glm{
+        线性代数库
+    }
+    object GLFW_GLAD{
+        你懂的
+    }
+    'glm -right-> GLFW_GLAD
 }
 
-object Camera{
-    摄像机
-}
-object Shader{
-    着色器加载
+package Scr{
+    package Log{
+        object Log{
+            日志输出
+        }
+    }
+    package Maths{
+        object Croods{
+            坐标相关
+        }
+    }
+    package Renderer{
+        object Renderer{
+            渲染相关
+        }
+    }
+    package Texture{
+        object Texture{
+            加载纹理
+        }
+    }
+    package World{
+        package Chunk{
+            object Chunk{
+                区块
+            }
+            object ChunkMeshBuilder{
+                构建区块Mesh
+            }
+            object Mesh{
+                Mesh对象
+            }
+            object VerticesData{
+                构建Mesh时的必要数据
+            }
+        }
+    }
+    object Application{
+        应用层
+    }
+    object CubeCraft{
+        CubeCraft
+    }
+    object Context{
+        上下文
+    }
+    object Camera{
+        摄像机
+    }
+    object Shader{
+        着色器加载
+    }
+    object Config{
+        相关配置
+    }
 }
 
-object Log{
-    日志输出
-}
-object Config{
-    相关配置
-}
-
-object glm{
-    线性代数库
-}
-object GLFW_GLAD{
-    你懂的
-}
-
-object Texture{
-    加载纹理
-}
-
-object Renderer{
-    渲染相关
-}
-object Chunk{
-    区块
-}
+Maths -[hidden]- Log
+Log -[hidden]left- Texture
 
 Application --> main
 CubeCraft --> Application
 
 Camera --> CubeCraft
-glm --> CubeCraft
-Config -> CubeCraft
+Config --> CubeCraft
 Texture --> CubeCraft
-Renderer -left-> CubeCraft
+Renderer --> CubeCraft
+Chunk -->CubeCraft
 
-GLFW_GLAD --> Context
 Shader --> Context
-Log -left-> Context
+Log --> Context
 CubeCraft --> Context
 
-GLFW_GLAD --> Texture
 Log --> Texture
+
+Mesh --> Chunk
+ChunkMeshBuilder --> Chunk
+
+Croods -right-> ChunkMeshBuilder
+VerticesData --> ChunkMeshBuilder
 
 @enduml

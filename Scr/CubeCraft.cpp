@@ -75,7 +75,6 @@ namespace cubecraft {
 		for (int x = 0; x < 16; x++) {
 			for (int y = 0; y < 16; y++) {
 				for (int z = 0; z < 16; z++) {
-
 					BlockCroodInChunk c(x, y, z);
 					chunk.setBlock(c, 1);
 				}
@@ -137,7 +136,7 @@ namespace cubecraft {
 			renderer.endRender(window);
 		}
 	}
-	void CubeCraft::Quit() {
+	void CubeCraft::Quit() const {
 		glDeleteVertexArrays(1, &VAO);
 		glDeleteBuffers(1, &VBO);
 		glDeleteBuffers(1, &EBO);

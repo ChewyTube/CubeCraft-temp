@@ -2,6 +2,8 @@
 
 namespace cubecraft {
 	Mesh ChunkMeshBuilder::buildMesh(chunkDataType data) {
+		float startTime = static_cast<float>(glfwGetTime());
+
 		// 通过区块数据合成一个顶点数据
 		std::vector<GLfloat> vertices;
 		std::vector<GLuint> vIndices;
@@ -35,6 +37,10 @@ namespace cubecraft {
 		}
 
 		Mesh mesh(vertices, vIndices, tIndices);
+
+		//@TODO使用Log.h
+		float endTime = static_cast<float>(glfwGetTime());
+		std::cout << "Successfully build a mesh. Use time:" << (endTime - startTime)*1000 << "ms";
 
 		return mesh;
 	}

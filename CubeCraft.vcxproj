@@ -80,6 +80,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -165,6 +166,10 @@
   <ItemGroup>
     <None Include=".gitattributes" />
     <None Include=".gitignore" />
+    <None Include="PlantUML\ideas.puml" />
+    <None Include="PlantUML\sequence.puml" />
+    <None Include="PlantUML\[image]headers.puml" />
+    <None Include="PlantUML\[real]headers.puml" />
     <None Include="Shader\shader.frag" />
     <None Include="Shader\shader.vert" />
   </ItemGroup>

@@ -1,9 +1,11 @@
-#pragma once
+ï»¿#pragma once
 
-#include "VerticesData.h"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 #include <vector>
 #include <unordered_map>
+#include <iostream>
 
 #include "../../Maths/Croods.h"
 #include "VerticesData.h"
@@ -22,7 +24,7 @@ namespace cubecraft {
 		front,
 		back,
 	};
-	// »ñÈ¡ÏàÁÚ×ø±ê
+	// è·å–ç›¸é‚»åæ ‡
 	struct Adjacent
 	{
 		int x, y, z;
@@ -30,7 +32,7 @@ namespace cubecraft {
 		void update(BlockCroodInChunk p) {
 			x = p.x; 
 			y = p.y; 
-			z = p.z;//Ë¢ĞÂxyzÊı¾İ
+			z = p.z;//åˆ·æ–°xyzæ•°æ®
 
 			up = { x, y + 1 , z };
 			down = { x, y - 1 , z };
