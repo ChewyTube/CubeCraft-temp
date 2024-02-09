@@ -40,16 +40,16 @@ namespace cubecraft {
 
 		//@TODO使用Log.h
 		float endTime = static_cast<float>(glfwGetTime());
-		std::cout << "Successfully build a mesh. Use time:" << (endTime - startTime)*1000 << "ms";
+		std::cout << "Successfully build chunk mesh. Use time:" << (endTime - startTime)*1000 << "ms\n";
 
 		return mesh;
 	}
 	int ChunkMeshBuilder::getBlock(chunkDataType& data, BlockCroodInChunk crood) {
-		try
-		{
-			return data.at(crood);
+		auto result = data.find(crood);
+		if (result != data.end()) {
+			return result->second;
 		}
-		catch (const std::exception&)
+		else
 		{
 			return -1;
 		}
@@ -91,9 +91,6 @@ namespace cubecraft {
 		}
 		for (int i = 0; i < 6; i++) {
 			vIndices[vIndices.size() - i - 1] += 4 * addedFaces;
-		}
-		for (int i = 0; i < 8; i++) {
-			//tIndices[tIndices.size() - i - 1] += 2 * addedFaces;
 		}
 
 		addedFaces++;

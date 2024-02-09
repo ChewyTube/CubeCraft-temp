@@ -5,6 +5,8 @@ namespace cubecraft {
 	float lastX = SCR_WIDTH / 2.0f;
 	float lastY = SCR_HEIGHT / 2.0f;
 	bool firstMouse = true;
+	GLuint frame = 0;
+	GLfloat start, end;
 	
 	// timing
 	float deltaTime = 0.0f;	// time between current frame and last frame
@@ -37,6 +39,13 @@ namespace cubecraft {
 	void processInput(GLFWwindow* window)
 	{
 		float speed = 4.0f;
+		if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS) {
+			speed = 32.0f;
+		}
+		else
+		{
+			speed = 4.0f;
+		}
 
 		if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 			glfwSetWindowShouldClose(window, true);
@@ -72,20 +81,24 @@ namespace cubecraft {
 
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-		for (int x = 0; x < 16; x++) {
-			for (int y = 0; y < 16; y++) {
-				for (int z = 0; z < 16; z++) {
-					BlockCroodInChunk c(x, y, z);
-					chunk.setBlock(c, 1);
+		// 放置方块
+		for (int x = 0; x < 32; x+=1) {
+			for (int y = 0; y < 16; y+=1) {
+				for (int z = 0; z < 32; z+=1) {
+					world.setBlock({ x, y, z });
+					chunk.setBlock({ x, y, z }, 1);
 				}
 			}
 		}
-		chunk.buildMesh();
-		auto textureIndices = chunk.getMesh().getTex_Indices();
-		auto vertices = chunk.getMesh().getVertices();
-		auto verticesIndices = chunk.getMesh().getVer_Indices();
+		// 构建Mesh
+		world.buildMesh();
+		world.buildWorldMesh();
 
-		TextureVBO = m_context.buildVBO(textureIndices.data(), textureIndices.size()*sizeof(GLuint));
+		auto textureIndices = world.getMesh().getTex_Indices();
+		auto vertices = world.getMesh().getVertices();
+		auto verticesIndices = world.getMesh().getVer_Indices();
+
+ 		TextureVBO = m_context.buildVBO(textureIndices.data(), textureIndices.size()*sizeof(GLuint));
 		VerticesVBO = m_context.buildVBO(vertices.data(), vertices.size()*sizeof(GLfloat));
 
 		VAO = m_context.buildVAO(VerticesVBO, TextureVBO);
@@ -93,13 +106,19 @@ namespace cubecraft {
 
 		shader = m_context.buildShader("Shader/shader.vert", "Shader/shader.frag");
 
-		texture = LoadTexture("Resources/Texture/dirt.png");
+     		texture = LoadTexture("Resources/Texture/dirt.png");
 	}
 	void CubeCraft::Loop() {
+		start = static_cast<float>(glfwGetTime());
 		while (!glfwWindowShouldClose(window)){
+			frame++;
 			float currentFrame = static_cast<float>(glfwGetTime());
 			deltaTime = currentFrame - lastFrame;
 			lastFrame = currentFrame;
+
+			if (frame % 512 == 0) {
+				std::cout << "FPS:" << 1 / deltaTime << std::endl;
+			}
 
 			processInput(window);
 
@@ -116,7 +135,6 @@ namespace cubecraft {
 			glm::mat4 view = camera.GetViewMatrix();
 			shader->setMat4("view", view);
 
-			//auto& data = chunk.getBlockData();
 			/*
 			for (auto& block : data) {
 				glm::mat4 model = glm::mat4(1.0f);
@@ -127,16 +145,19 @@ namespace cubecraft {
 			}
 			*/
 
-			auto points = chunk.getMesh().getVertices().size();
+			auto points = world.getMesh().getVertices().size();
 			glm::mat4 model = glm::mat4(1.0f);
 			shader->setMat4("model", model);
 			glBindVertexArray(VAO);
-			glDrawElements(GL_TRIANGLES, points/2, GL_UNSIGNED_INT, 0);
+			glDrawElements(GL_TRIANGLES, points, GL_UNSIGNED_INT, 0);
 			// -------------------------------------------
 			renderer.endRender(window);
 		}
+		end = static_cast<float>(glfwGetTime());
 	}
 	void CubeCraft::Quit() const {
+		std::cout << "Average FPS:" << frame / (end - start) << std::endl;
+
 		glDeleteVertexArrays(1, &VAO);
 		glDeleteBuffers(1, &VBO);
 		glDeleteBuffers(1, &EBO);

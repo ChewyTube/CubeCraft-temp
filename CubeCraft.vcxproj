@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Scr\Maths\Croods.cpp" />
+    <ClCompile Include="Scr\World\Block\Block.cpp" />
     <ClCompile Include="Scr\World\Chunk\ChunkMeshBuilder.cpp" />
     <ClCompile Include="D:\C++\CubeCraft\Cubecraft\glad.c" />
     <ClCompile Include="main.cpp" />
@@ -145,8 +147,10 @@
     <ClCompile Include="Scr\World\Chunk\Chunk.cpp" />
     <ClCompile Include="Scr\World\Chunk\Mesh.cpp" />
     <ClCompile Include="Scr\World\Chunk\VerticesData.cpp" />
+    <ClCompile Include="Scr\World\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scr\World\Block\Block.h" />
     <ClInclude Include="Scr\World\Chunk\ChunkMeshBuilder.h" />
     <ClInclude Include="Scr\Application.h" />
     <ClInclude Include="Scr\Camera.h" />
@@ -161,6 +165,7 @@
     <ClInclude Include="Scr\World\Chunk\Chunk.h" />
     <ClInclude Include="Scr\World\Chunk\Mesh.h" />
     <ClInclude Include="Scr\World\Chunk\VerticesData.h" />
+    <ClInclude Include="Scr\World\World.h" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>

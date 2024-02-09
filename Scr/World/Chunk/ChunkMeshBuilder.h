@@ -12,6 +12,8 @@
 
 #include "Mesh.h"
 
+// @TODO 生成Mesh时顶点去重
+
 namespace cubecraft {
 	using chunkDataType = std::unordered_map<BlockCroodInChunk, int, CroodHash, CroodEqual>;
 	

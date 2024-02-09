@@ -5,6 +5,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <functional>
+#include <type_traits>
 
 namespace cubecraft {
 	struct Crood : glm::vec4
@@ -18,6 +19,7 @@ namespace cubecraft {
 			this->w = w;
 		}
 	};
+
 	struct CroodHash {
 		std::size_t operator()(const Crood& c) const {
 			std::hash<decltype(c.x)> hasher;
@@ -41,13 +43,19 @@ namespace cubecraft {
 	struct BlockCroodInWorld : Crood
 	{
 		using Crood::Crood;
+		//BlockCroodInWorld(BlockCroodInChunk c1, ChunkCroodInWorld c2);
 	};
 	struct BlockCroodInChunk : Crood
 	{
 		using Crood::Crood;
+		//BlockCroodInChunk(BlockCroodInWorld c);
 	};
 	struct ChunkCroodInWorld : Crood
 	{
 		using Crood::Crood;
+		//ChunkCroodInWorld(BlockCroodInWorld c);
 	};
+	
+	ChunkCroodInWorld getChunkCrood(BlockCroodInWorld c);
+	BlockCroodInChunk getBlockChunkCrood(BlockCroodInWorld c);
 }

@@ -11,6 +11,7 @@
 #include "Renderer/Renderer.h"
 
 #include "World/Chunk/Chunk.h"
+#include "World/World.h"
 
 namespace cubecraft {
 	class CubeCraft {
@@ -29,5 +30,6 @@ namespace cubecraft {
 		GLuint VAO, VBO, EBO, texture;
 		GLuint VerticesVBO, TextureVBO;
 		Chunk chunk;
+		World world;
 	};
 }
