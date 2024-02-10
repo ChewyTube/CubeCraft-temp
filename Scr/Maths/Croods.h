@@ -42,6 +42,7 @@ namespace cubecraft {
 
 	struct BlockCroodInWorld : Crood
 	{
+		// @TODO用构造函数转换可能更好
 		using Crood::Crood;
 		//BlockCroodInWorld(BlockCroodInChunk c1, ChunkCroodInWorld c2);
 	};

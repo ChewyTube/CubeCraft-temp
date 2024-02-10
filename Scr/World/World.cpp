@@ -26,7 +26,7 @@ namespace cubecraft {
 		std::vector<GLuint> vIndices; // 顶点索引
 		std::vector<GLuint> tIndices; // 纹理索引
 
-		for (auto chunk : worldData) {
+		for (auto& chunk : worldData) {
 			Mesh chunkMesh = chunk.second.getMesh();
 			auto chunkVertices = chunkMesh.getVertices();
 			auto chunkVIndices = chunkMesh.getVer_Indices();
@@ -50,6 +50,7 @@ namespace cubecraft {
 		worldMesh = Mesh(vertices, vIndices, tIndices);
 		float endTime = static_cast<float>(glfwGetTime());
 		std::cout << "Successfully build world mesh. Use time:" << (endTime - startTime) * 1000 << "ms\n";
+		std::cout << "Total vertices: " << vertices.size()/3 << std::endl;
 	}
 	Mesh World::getMesh() {
 		return worldMesh;

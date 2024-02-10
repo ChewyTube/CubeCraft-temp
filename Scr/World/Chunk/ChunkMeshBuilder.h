@@ -13,10 +13,12 @@
 #include "Mesh.h"
 
 // @TODO 生成Mesh时顶点去重
+// 去重方法为XXXPointXXX函数，但是效果不好，跨区快有bug
 
 namespace cubecraft {
 	using chunkDataType = std::unordered_map<BlockCroodInChunk, int, CroodHash, CroodEqual>;
-	
+	using Vertices = std::unordered_map<Vertex, GLuint, VertexHash, VertexEqual>;
+
 	enum Direction
 	{
 		up,
@@ -48,13 +50,28 @@ namespace cubecraft {
 	class ChunkMeshBuilder {
 	public:
 		Mesh buildMesh(chunkDataType data);
+		Mesh buildMeshwithPoint(chunkDataType data);
 	private:
 		Adjacent adj;
 
 		int getBlock(chunkDataType& data, BlockCroodInChunk crood);
-		void addFace(std::vector<GLfloat>& vertices, 
-			std::vector<GLuint>& vIndices,std::vector<GLuint>& tIndices, 
-			Direction dir, BlockCroodInChunk pos, int& addedFaces);
+		void addFace(
+			std::vector<GLfloat>&	vertices, 
+			std::vector<GLuint>&	vIndices,
+			std::vector<GLuint>&	tIndices, 
+			Direction				dir, 
+			BlockCroodInChunk		pos, 
+			int&					addedFaces
+		);
+		void addFaceWithPoint(
+			Vertices&				verticesPoints,
+			std::vector<GLuint>&	vIndices,
+			Direction				dir,
+			BlockCroodInChunk		pos,
+			int&					addedFaces
+		);
+		std::vector<GLfloat> getVerticesfromPoints(Vertices& verticesPoints);
+		std::vector<GLuint> getTIndicesfromPoints(Vertices& verticesPoints);
 	};
 }
 

@@ -9,6 +9,7 @@ namespace cubecraft {
 	}
 	
 	void Chunk::buildMesh() {
+		//mesh = builder.buildMeshwithPoint(blockData);
 		mesh = builder.buildMesh(blockData);
 	}
 	Mesh Chunk::getMesh() {

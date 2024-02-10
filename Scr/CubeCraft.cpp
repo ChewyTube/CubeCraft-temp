@@ -5,8 +5,9 @@ namespace cubecraft {
 	float lastX = SCR_WIDTH / 2.0f;
 	float lastY = SCR_HEIGHT / 2.0f;
 	bool firstMouse = true;
-	GLuint frame = 0;
-	GLfloat start, end;
+	// 帧率相关
+	GLuint frame = 0, deltaFrame = 0;
+	GLfloat start, end, first, second;
 	
 	// timing
 	float deltaTime = 0.0f;	// time between current frame and last frame
@@ -70,6 +71,7 @@ namespace cubecraft {
 		}
 	}
 
+	
 	void CubeCraft::Init() {
 		window = m_context.initOpenGL();
 
@@ -83,10 +85,12 @@ namespace cubecraft {
 
 		// 放置方块
 		for (int x = 0; x < 32; x+=1) {
-			for (int y = 0; y < 16; y+=1) {
+			for (int y = 0; y < 32; y+=1) {
 				for (int z = 0; z < 32; z+=1) {
+					//world.setBlock({ x+(z%2), y, z+(y%2)});
+					//world.setBlock({ x+y, y+z, z+x });
+
 					world.setBlock({ x, y, z });
-					chunk.setBlock({ x, y, z }, 1);
 				}
 			}
 		}
@@ -110,24 +114,27 @@ namespace cubecraft {
 	}
 	void CubeCraft::Loop() {
 		start = static_cast<float>(glfwGetTime());
+		first = static_cast<float>(glfwGetTime());
 		while (!glfwWindowShouldClose(window)){
-			frame++;
+			frame++; deltaFrame++;
 			float currentFrame = static_cast<float>(glfwGetTime());
 			deltaTime = currentFrame - lastFrame;
 			lastFrame = currentFrame;
 
 			if (frame % 512 == 0) {
-				std::cout << "FPS:" << 1 / deltaTime << std::endl;
+				second = static_cast<float>(glfwGetTime());
+				std::cout << "FPS:" << (float)deltaFrame / (second - first) << std::endl;
+				deltaFrame = 0;
+				first = second;
 			}
 
 			processInput(window);
 
 			renderer.startRender();
 
-			glBindTexture(GL_TEXTURE_2D, texture);
-
 			// 为方便调试
 			//renderer.render(shader, camera, VAO);
+			glBindTexture(GL_TEXTURE_2D, texture);
 			shader->use();
 
 			glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, near, far);
@@ -135,21 +142,12 @@ namespace cubecraft {
 			glm::mat4 view = camera.GetViewMatrix();
 			shader->setMat4("view", view);
 
-			/*
-			for (auto& block : data) {
-				glm::mat4 model = glm::mat4(1.0f);
-				model = glm::translate(model, { block.first.x, block.first.y, block.first.z });
-				shader->setMat4("model", model);
-				glBindVertexArray(VAO);
-				glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-			}
-			*/
-
 			auto points = world.getMesh().getVertices().size();
 			glm::mat4 model = glm::mat4(1.0f);
 			shader->setMat4("model", model);
 			glBindVertexArray(VAO);
-			glDrawElements(GL_TRIANGLES, points, GL_UNSIGNED_INT, 0);
+			glDrawElements(GL_TRIANGLES, 32768*8, GL_UNSIGNED_INT, 0);
+
 			// -------------------------------------------
 			renderer.endRender(window);
 		}
