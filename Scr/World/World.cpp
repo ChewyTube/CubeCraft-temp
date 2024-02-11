@@ -5,7 +5,7 @@ namespace cubecraft {
 		auto chunkcrood = getChunkCrood(crood);
 		auto blockcrood = getBlockChunkCrood(crood);
 
-		auto& chunk = worldData[chunkcrood];
+		auto& chunk = getChunk(chunkcrood, set);
 		chunk.setBlock(blockcrood, 1);
 	}
 
@@ -20,6 +20,7 @@ namespace cubecraft {
 	}
 
 	void World::buildWorldMesh() {
+		buildMesh();
 		float startTime = static_cast<float>(glfwGetTime());
 		// @TODO 去重！！！
 		std::vector<GLfloat> vertices; // 顶点
@@ -49,10 +50,37 @@ namespace cubecraft {
 
 		worldMesh = Mesh(vertices, vIndices, tIndices);
 		float endTime = static_cast<float>(glfwGetTime());
-		std::cout << "Successfully build world mesh. Use time:" << (endTime - startTime) * 1000 << "ms\n";
+		std::cout << "Successfully build world mesh. Use time:" << (endTime - startTime) * 1000 << "ms";
+		std::cout << "	World pointer:" << p_world << std::endl;
 		std::cout << "Total vertices: " << vertices.size()/3 << std::endl;
 	}
 	Mesh World::getMesh() {
 		return worldMesh;
+	}
+	Block World::getBlock(BlockCroodInWorld crood, usage u) {
+		ChunkCroodInWorld chunkcrood = getChunkCrood(crood);
+		BlockCroodInChunk blockcrood = getBlockChunkCrood(crood);
+
+		auto& chunk = getChunk(chunkcrood, u);
+		if (chunk.empty()) {
+			return Block(-1);
+		}
+		auto block = chunk.getBlock(blockcrood);
+
+		return block;
+	}
+	Chunk& World::getChunk(ChunkCroodInWorld crood, usage u) {
+		auto it = worldData.find(crood);
+		if (it == worldData.end()) {
+			if (u == get) {
+				Chunk chunk(nullptr, {});
+				return chunk;
+			}
+			if (u == set) {
+				auto chunk = worldData.insert({ crood, Chunk(p_world, crood) });
+			}
+			
+		}
+		return worldData.find(crood)->second;
 	}
 }

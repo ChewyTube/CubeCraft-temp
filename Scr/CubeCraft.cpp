@@ -2,8 +2,8 @@
 
 namespace cubecraft {
 	Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
-	float lastX = SCR_WIDTH / 2.0f;
-	float lastY = SCR_HEIGHT / 2.0f;
+	float lastX = SCR_WIDTH		/ 2.0f;
+	float lastY = SCR_HEIGHT	/ 2.0f;
 	bool firstMouse = true;
 	// 帧率相关
 	GLuint frame = 0, deltaFrame = 0;
@@ -88,14 +88,13 @@ namespace cubecraft {
 			for (int y = 0; y < 32; y+=1) {
 				for (int z = 0; z < 32; z+=1) {
 					//world.setBlock({ x+(z%2), y, z+(y%2)});
-					//world.setBlock({ x+y, y+z, z+x });
+					world.setBlock({ x*y, y*z, z*x });
 
-					world.setBlock({ x, y, z });
+					//world.setBlock({ x, y, z });
 				}
 			}
 		}
 		// 构建Mesh
-		world.buildMesh();
 		world.buildWorldMesh();
 
 		auto textureIndices = world.getMesh().getTex_Indices();
@@ -146,7 +145,7 @@ namespace cubecraft {
 			glm::mat4 model = glm::mat4(1.0f);
 			shader->setMat4("model", model);
 			glBindVertexArray(VAO);
-			glDrawElements(GL_TRIANGLES, 32768*8, GL_UNSIGNED_INT, 0);
+			glDrawElements(GL_TRIANGLES, points, GL_UNSIGNED_INT, 0);
 
 			// -------------------------------------------
 			renderer.endRender(window);

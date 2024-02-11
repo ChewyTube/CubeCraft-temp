@@ -4,17 +4,34 @@
 #include "Mesh.h"
 #include "ChunkMeshBuilder.h"
 
+#include "../Block/Block.h"
+
+class World;
 namespace cubecraft {
-	class Chunk {
+	using blockDataType = std::unordered_map<BlockCroodInChunk, Block, CroodHash, CroodEqual>;
+	
+	class Chunk{
 	public:
-		std::unordered_map<BlockCroodInChunk, int, CroodHash, CroodEqual>& getBlockData();
+		Chunk(World* p, ChunkCroodInWorld c){
+			mp_world = p;
+			builder = ChunkMeshBuilder(p, c);
+
+			m_crood = c;
+		}
+
+		blockDataType& getBlockData();
 		void setBlock(BlockCroodInChunk crood, int block);
 		void buildMesh();
 		Mesh getMesh();
+		Block getBlock(BlockCroodInChunk crood);
+		
+		bool empty();
 	private:
+		ChunkCroodInWorld m_crood;
 		//暂定为0无方块 1有方块
-		std::unordered_map<BlockCroodInChunk, int, CroodHash, CroodEqual> blockData;
+		blockDataType blockData;
 		Mesh mesh;
-		ChunkMeshBuilder builder;
+		ChunkMeshBuilder builder = ChunkMeshBuilder(nullptr, {});
+		World* mp_world;
 	};
 }

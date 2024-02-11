@@ -59,4 +59,5 @@ namespace cubecraft {
 	
 	ChunkCroodInWorld getChunkCrood(BlockCroodInWorld c);
 	BlockCroodInChunk getBlockChunkCrood(BlockCroodInWorld c);
+	BlockCroodInWorld getBlockWorldCrood(BlockCroodInChunk c1, ChunkCroodInWorld c2);
 }

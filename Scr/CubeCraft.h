@@ -29,7 +29,6 @@ namespace cubecraft {
 		Renderer renderer;
 		GLuint VAO, VBO, EBO, texture;
 		GLuint VerticesVBO, TextureVBO;
-		Chunk chunk;
 		World world;
 	};
 }

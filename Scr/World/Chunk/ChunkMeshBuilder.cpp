@@ -1,7 +1,13 @@
 ﻿#include "ChunkMeshBuilder.h"
 
+#include "../World.h"
+
 namespace cubecraft {
 	Mesh ChunkMeshBuilder::buildMesh(chunkDataType data) {
+		if (data.size() == 0) {
+			std::cout << "Empty chunk;Chunkcrood:" << m_crood.x << ", " << m_crood.y << ", " << m_crood.z << std::endl;
+			return Mesh();
+		}
 		float startTime = static_cast<float>(glfwGetTime());
 
 		// 通过区块数据合成一个顶点数据
@@ -40,18 +46,20 @@ namespace cubecraft {
 
 		//@TODO使用Log.h
 		float endTime = static_cast<float>(glfwGetTime());
-		std::cout << "Successfully build chunk mesh. Use time:" << (endTime - startTime)*1000 << "ms\n";
-
+		std::cout << "Successfully build chunk mesh. Use time:" << (endTime - startTime)*1000 << "ms";
+		std::cout << "	Chunk crood:" << m_crood.x << ", " << m_crood.y << ", " << m_crood.z << std::endl;
 		return mesh;
 	}
 	int ChunkMeshBuilder::getBlock(chunkDataType& data, BlockCroodInChunk crood) {
 		auto result = data.find(crood);
 		if (result != data.end()) {
-			return result->second;
+			return result->second.getId();
 		}
 		else
 		{
-			return -1;
+			auto blockcrood = getBlockWorldCrood(crood, m_crood);
+			auto block = mp_world->getBlock(blockcrood, get);
+			return block.getId();
 		}
 	}
 	void ChunkMeshBuilder::addFace(

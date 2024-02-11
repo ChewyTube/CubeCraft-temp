@@ -11,12 +11,15 @@
 #include "VerticesData.h"
 
 #include "Mesh.h"
+#include "../Block/Block.h"
 
 // @TODO 生成Mesh时顶点去重
 // 去重方法为XXXPointXXX函数，但是效果不好，跨区快有bug
 
 namespace cubecraft {
-	using chunkDataType = std::unordered_map<BlockCroodInChunk, int, CroodHash, CroodEqual>;
+	class World;
+
+	using chunkDataType = std::unordered_map<BlockCroodInChunk, Block, CroodHash, CroodEqual>;
 	using Vertices = std::unordered_map<Vertex, GLuint, VertexHash, VertexEqual>;
 
 	enum Direction
@@ -49,6 +52,10 @@ namespace cubecraft {
 
 	class ChunkMeshBuilder {
 	public:
+		ChunkMeshBuilder(World* p, ChunkCroodInWorld c) {
+			mp_world = p;
+			m_crood = c;
+		}
 		Mesh buildMesh(chunkDataType data);
 		Mesh buildMeshwithPoint(chunkDataType data);
 	private:
@@ -72,6 +79,9 @@ namespace cubecraft {
 		);
 		std::vector<GLfloat> getVerticesfromPoints(Vertices& verticesPoints);
 		std::vector<GLuint> getTIndicesfromPoints(Vertices& verticesPoints);
+
+		World* mp_world;
+		ChunkCroodInWorld m_crood;
 	};
 }
 

@@ -36,4 +36,11 @@ namespace cubecraft {
 		auto w = (size_t)c.w % 16;
 		return { x, y, z, w };
 	}
+	BlockCroodInWorld getBlockWorldCrood(BlockCroodInChunk c1, ChunkCroodInWorld c2) {
+		size_t x = c1.x + c2.x * 16;
+		size_t y = c1.y + c2.y * 16;
+		size_t z = c1.z + c2.z * 16;
+		size_t w = c1.w + c2.w * 16;
+		return{ x, y, z, w };
+	}
 }
