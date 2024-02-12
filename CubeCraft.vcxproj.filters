@@ -125,6 +125,21 @@
     <ClInclude Include="Scr\Texture\TextureSegmentation.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Scr\World\Block\BlockInstance\Dirt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scr\World\Block\BlockInstance\Grass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scr\Enum\BlockType.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scr\Enum\Direction.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scr\Enum\Usage.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\shader.vert" />

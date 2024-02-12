@@ -65,7 +65,7 @@ namespace cubecraft {
 
 	struct TexAbsCrood
 	{
-		GLdouble x, y;
+		GLfloat x, y;
 	}; 
 	struct TexRelCrood
 	{

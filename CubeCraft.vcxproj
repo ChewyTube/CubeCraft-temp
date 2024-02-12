@@ -152,9 +152,14 @@
     <ClCompile Include="Scr\World\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scr\Enum\Direction.h" />
+    <ClInclude Include="Scr\Enum\Usage.h" />
     <ClInclude Include="Scr\Maths\Noise.h" />
     <ClInclude Include="Scr\Texture\TextureSegmentation.h" />
     <ClInclude Include="Scr\World\Block\Block.h" />
+    <ClInclude Include="Scr\World\Block\BlockInstance\Dirt.h" />
+    <ClInclude Include="Scr\World\Block\BlockInstance\Grass.h" />
+    <ClInclude Include="Scr\Enum\BlockType.h" />
     <ClInclude Include="Scr\World\Chunk\ChunkMeshBuilder.h" />
     <ClInclude Include="Scr\Application.h" />
     <ClInclude Include="Scr\Camera.h" />

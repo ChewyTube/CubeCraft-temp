@@ -23,22 +23,22 @@ namespace cubecraft {
 			adj.update(position);
 
 			if (getBlock(data, adj.up) == -1) { // 上面没有方块
-				addFace(vertices, vIndices, tIndices, up, adj.up, addedFaces);
+				addFace(vertices, vIndices, tIndices, blockType, up,    adj.up, addedFaces);
 			}
 			if (getBlock(data, adj.down) == -1) { // 下面没有方块
-				addFace(vertices, vIndices, tIndices, down, adj.up, addedFaces);
+				addFace(vertices, vIndices, tIndices, blockType, down,  adj.up, addedFaces);
 			}
 			if (getBlock(data, adj.left) == -1) { 
-				addFace(vertices, vIndices, tIndices, left, adj.up, addedFaces);
+				addFace(vertices, vIndices, tIndices, blockType, left,  adj.up, addedFaces);
 			}
 			if (getBlock(data, adj.right) == -1) { 
-				addFace(vertices, vIndices, tIndices, right, adj.up, addedFaces);
+				addFace(vertices, vIndices, tIndices, blockType, right, adj.up, addedFaces);
 			}
 			if (getBlock(data, adj.front) == -1) { 
-				addFace(vertices, vIndices, tIndices, front, adj.up, addedFaces);
+				addFace(vertices, vIndices, tIndices, blockType, front, adj.up, addedFaces);
 			}
 			if (getBlock(data, adj.back) == -1) { 
-				addFace(vertices, vIndices, tIndices, back, adj.up, addedFaces);
+				addFace(vertices, vIndices, tIndices, blockType, back,  adj.up, addedFaces);
 			}
 		}
 
@@ -66,11 +66,13 @@ namespace cubecraft {
 		std::vector<GLfloat>&	vertices,
 		std::vector<GLuint>&	vIndices, 
 		std::vector<GLfloat>&	tIndices,
+		Block					block,
 		Direction				dir, 
 		BlockCroodInChunk		pos, 
 		int&					addedFaces
 	) {
-		std::array<GLfloat, 8> textureIndices{};
+		auto texcrood = getTexCrood(block.getId(), dir);
+		/*
 		switch (dir)
 		{
 		case cubecraft::up:
@@ -95,6 +97,8 @@ namespace cubecraft {
 			textureIndices = segmenter.getTexIndices({ 0, 0 });
 			break;
 		}
+		*/
+		auto textureIndices = segmenter.getTexIndices(texcrood);
 
 		// 添加索引
 		switch (dir)

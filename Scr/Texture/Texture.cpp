@@ -33,4 +33,36 @@ namespace cubecraft {
 
         return texture;
     }
+    // @ TODO 为这个函数找到一个更合适的头文件
+    TexRelCrood getTexCrood(BlockType block, Direction dir) {
+        switch (block)
+        {
+        case cubecraft::Dirt:
+            return { 0, 0 };
+            break;
+        case cubecraft::Grass:
+            switch (dir)
+            {
+            case cubecraft::up:
+                return { 2, 0 };
+                break;
+            case cubecraft::down:
+                return { 0, 0 };
+                break;
+            case cubecraft::left:
+            case cubecraft::right:
+            case cubecraft::front:
+            case cubecraft::back:
+                return { 1, 0 };
+                break;
+            default:
+                return { 0, 0 };
+                break;
+            }
+            break;
+        default:
+            return { 0, 0 };
+            break;
+        }
+    }
 }

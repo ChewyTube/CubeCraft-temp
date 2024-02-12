@@ -86,14 +86,13 @@ namespace cubecraft {
 		// 放置方块
 		for (float x = 0; x < 64; x+=1) {
 			for (float z = 0; z < 64; z+=1) {
-				//world.setBlock({ x+(z%2), y, z+(y%2)});
-				//world.setBlock({ x*y, y*z, z*x });
-				auto h = noise.getNoise(x/16, z/16)*8+10;
+				auto h = noise.getNoise(x/16, z/16)*16+10;
 				if (h < 0) {
 					continue;
 				}
+				world.setBlock({ (int)x, (int)h, (int)z }, Block(Grass));
 				for (int y = 0; y < h; y++) {
-					world.setBlock({ (int)x, (int)y, (int)z });
+					world.setBlock({ (int)x, (int)y, (int)z }, Block(Dirt));
 				}
 			}
 		}
@@ -159,7 +158,8 @@ namespace cubecraft {
 		std::cout << "Average FPS:" << frame / (end - start) << std::endl;
 
 		glDeleteVertexArrays(1, &VAO);
-		glDeleteBuffers(1, &VBO);
+		glDeleteBuffers(1, &VerticesVBO);
+		glDeleteBuffers(1, &TextureVBO);
 		glDeleteBuffers(1, &EBO);
 
 		glfwTerminate();

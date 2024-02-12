@@ -10,8 +10,9 @@
 #include "Texture/Texture.h"
 #include "Renderer/Renderer.h"
 
-#include "World/Chunk/Chunk.h"
 #include "World/World.h"
+#include "World/Chunk/Chunk.h"
+#include "Enum/BlockType.h"
 
 #include "Maths/Noise.h"
 
@@ -29,7 +30,7 @@ namespace cubecraft {
 		GLFWwindow* window;
 		Shader* shader;
 		Renderer renderer;
-		GLuint VAO, VBO, EBO, texture;
+		GLuint VAO, EBO, texture;
 		GLuint VerticesVBO, TextureVBO;
 		World world;
 

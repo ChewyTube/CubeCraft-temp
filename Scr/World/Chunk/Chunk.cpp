@@ -4,7 +4,7 @@ namespace cubecraft {
 	blockDataType& Chunk::getBlockData() {
 		return blockData;
 	}
-	void Chunk::setBlock(BlockCroodInChunk crood, int block) {
+	void Chunk::setBlock(BlockCroodInChunk crood, Block block) {
 		blockData.insert({ crood, block });
 	}
 	
@@ -21,7 +21,7 @@ namespace cubecraft {
 			return block->second;
 		}
 		else {
-			return Block(-1);
+			return Block(None);
 		}
 	}
 	bool Chunk::empty() {

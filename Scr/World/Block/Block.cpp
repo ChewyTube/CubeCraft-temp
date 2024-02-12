@@ -1,10 +1,10 @@
 ﻿#include "Block.h"
 
 namespace cubecraft {
-	Block::Block(GLint id) {
+	Block::Block(BlockType id) {
 		this->id = id;
 	}
-	GLint Block::getId() {
+	BlockType Block::getId() {
 		return id;
 	}
 }

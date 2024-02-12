@@ -20,7 +20,7 @@ namespace cubecraft {
 		}
 
 		blockDataType& getBlockData();
-		void setBlock(BlockCroodInChunk crood, int block);
+		void setBlock(BlockCroodInChunk crood, Block block);
 		void buildMesh();
 		Mesh getMesh();
 		Block getBlock(BlockCroodInChunk crood);

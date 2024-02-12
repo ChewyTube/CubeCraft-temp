@@ -1,13 +1,15 @@
 ﻿#pragma once
 
 #include <glad/glad.h>
+#include "../../Enum/BlockType.h"
+
 
 namespace cubecraft {
 	class Block {
 	public:
-		Block(GLint id);
-		GLint getId();
+		Block(BlockType id);
+		BlockType getId();
 	private:
-		GLint id;
+		BlockType id;
 	};
 }

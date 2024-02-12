@@ -1,15 +1,15 @@
 ﻿#include "World.h"
 
 namespace cubecraft {
-	void World::setBlock(BlockCroodInWorld crood) {
+	void World::setBlock(BlockCroodInWorld crood, Block block) {
 		auto chunkcrood = getChunkCrood(crood);
 		auto blockcrood = getBlockChunkCrood(crood);
 
 		auto& chunk = getChunk(chunkcrood, set);
-		chunk.setBlock(blockcrood, 1);
+		chunk.setBlock(blockcrood, block);
 	}
 
-	std::unordered_map<ChunkCroodInWorld, Chunk, CroodHash, CroodEqual> World::getWorldData() {
+	WorldDataType World::getWorldData() {
 		return worldData;
 	}
 
@@ -18,7 +18,6 @@ namespace cubecraft {
 			chunk.second.buildMesh();
 		}
 	}
-
 	void World::buildWorldMesh() {
 		buildMesh();
 		float startTime = static_cast<float>(glfwGetTime());
@@ -63,7 +62,7 @@ namespace cubecraft {
 
 		auto& chunk = getChunk(chunkcrood, u);
 		if (chunk.empty()) {
-			return Block(-1);
+			return Block(None);
 		}
 		auto block = chunk.getBlock(blockcrood);
 

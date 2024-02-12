@@ -5,18 +5,18 @@
 #include "../Maths/Croods.h"
 #include "Chunk/Chunk.h"
 
+#include "../Enum/Usage.h"
+
 namespace cubecraft{
-	enum usage {
-		set,
-		get,
-	};
+	using WorldDataType = std::unordered_map<ChunkCroodInWorld, Chunk, CroodHash, CroodEqual>;
+	
 
 	class World {
 	public:
 		World() {
 			p_world = this;
 		}
-		void setBlock(BlockCroodInWorld crood);
+		void setBlock(BlockCroodInWorld crood, Block block);
 		std::unordered_map<ChunkCroodInWorld, Chunk, CroodHash, CroodEqual> getWorldData();
 		// @TODO 写一个获得世界Mesh的函数/合并chunkMesh
 		void buildWorldMesh();
@@ -27,7 +27,7 @@ namespace cubecraft{
 		Block getBlock(BlockCroodInWorld crood, usage u);
 		Chunk& getChunk(ChunkCroodInWorld crood, usage u);
 	private:
-		std::unordered_map<ChunkCroodInWorld, Chunk, CroodHash, CroodEqual> worldData;
+		WorldDataType worldData;
 		Mesh worldMesh;
 		World* p_world;
 	};
