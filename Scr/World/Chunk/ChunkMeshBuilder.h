@@ -13,6 +13,8 @@
 #include "Mesh.h"
 #include "../Block/Block.h"
 
+#include "../../Texture/TextureSegmentation.h"
+
 // @TODO 生成Mesh时顶点去重
 // 去重方法为XXXPointXXX函数，但是效果不好，跨区快有bug
 
@@ -65,7 +67,7 @@ namespace cubecraft {
 		void addFace(
 			std::vector<GLfloat>&	vertices, 
 			std::vector<GLuint>&	vIndices,
-			std::vector<GLuint>&	tIndices, 
+			std::vector<GLfloat>&	tIndices,
 			Direction				dir, 
 			BlockCroodInChunk		pos, 
 			int&					addedFaces
@@ -78,10 +80,11 @@ namespace cubecraft {
 			int&					addedFaces
 		);
 		std::vector<GLfloat> getVerticesfromPoints(Vertices& verticesPoints);
-		std::vector<GLuint> getTIndicesfromPoints(Vertices& verticesPoints);
+		std::vector<GLfloat> getTIndicesfromPoints(Vertices& verticesPoints);
 
 		World* mp_world;
 		ChunkCroodInWorld m_crood;
+		TextureSegmentation segmenter;
 	};
 }
 

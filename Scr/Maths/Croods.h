@@ -7,6 +7,8 @@
 #include <functional>
 #include <type_traits>
 
+#include "glad/glad.h"
+
 namespace cubecraft {
 	struct Crood : glm::vec4
 	{
@@ -60,4 +62,13 @@ namespace cubecraft {
 	ChunkCroodInWorld getChunkCrood(BlockCroodInWorld c);
 	BlockCroodInChunk getBlockChunkCrood(BlockCroodInWorld c);
 	BlockCroodInWorld getBlockWorldCrood(BlockCroodInChunk c1, ChunkCroodInWorld c2);
+
+	struct TexAbsCrood
+	{
+		GLdouble x, y;
+	}; 
+	struct TexRelCrood
+	{
+		GLuint x, y;
+	};
 }

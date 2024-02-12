@@ -60,6 +60,12 @@
     <ClCompile Include="Scr\Maths\Croods.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Scr\Maths\Noise.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Scr\Texture\TextureSegmentation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scr\Application.h">
@@ -113,6 +119,12 @@
     <ClInclude Include="Scr\World\Block\Block.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Scr\Maths\Noise.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scr\Texture\TextureSegmentation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\shader.vert" />
@@ -129,6 +141,15 @@
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="Resources\Texture\test.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Resources\Texture\texture.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Resources\Texture\origin_grass_block_side.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Resources\Texture\origin_grass_block_top.png">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

@@ -56,7 +56,7 @@ namespace cubecraft {
         return { VBO, VAO };
     }
     */
-    GLuint Context::buildVBO(GLfloat* data, GLint size) {
+    GLuint Context::buildVBO(GLfloat* data, GLuint size) {
         GLuint VBO;
 
         glGenBuffers(1, &VBO);
@@ -68,7 +68,19 @@ namespace cubecraft {
 
         return VBO;
     }
-    GLuint Context::buildVBO(GLuint* data, GLint size) {
+    GLuint Context::buildVBO(GLuint* data, GLuint size) {
+        GLuint VBO;
+
+        glGenBuffers(1, &VBO);
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+        glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        return VBO;
+    }
+    GLuint Context::buildVBO(GLdouble* data, GLuint size) {
         GLuint VBO;
 
         glGenBuffers(1, &VBO);
@@ -101,7 +113,7 @@ namespace cubecraft {
 
         glEnableVertexAttribArray(1);
         glBindBuffer(GL_ARRAY_BUFFER, TextureVBO);
-        glVertexAttribPointer(1, 2, GL_UNSIGNED_INT, GL_FALSE, 0, (void*)0);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
         glBindVertexArray(0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -118,8 +130,23 @@ namespace cubecraft {
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_STATIC_DRAW);
 
         glBindVertexArray(0);
-        //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
         return EBO;
     }
+    /*
+    template<typename T>
+    GLuint Context::buildVBO(T* data, GLuint size) {
+        GLuint VBO;
+
+        glGenBuffers(1, &VBO);
+        glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+        glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
+
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        return VBO;
+    }
+    
+    */
 }

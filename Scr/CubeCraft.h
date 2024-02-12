@@ -13,6 +13,8 @@
 #include "World/Chunk/Chunk.h"
 #include "World/World.h"
 
+#include "Maths/Noise.h"
+
 namespace cubecraft {
 	class CubeCraft {
 	public:
@@ -30,5 +32,7 @@ namespace cubecraft {
 		GLuint VAO, VBO, EBO, texture;
 		GLuint VerticesVBO, TextureVBO;
 		World world;
+
+		PerlinNoise noise;
 	};
 }

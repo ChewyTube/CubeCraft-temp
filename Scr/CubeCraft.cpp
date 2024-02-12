@@ -84,13 +84,16 @@ namespace cubecraft {
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 		// 放置方块
-		for (int x = 0; x < 32; x+=1) {
-			for (int y = 0; y < 32; y+=1) {
-				for (int z = 0; z < 32; z+=1) {
-					//world.setBlock({ x+(z%2), y, z+(y%2)});
-					world.setBlock({ x*y, y*z, z*x });
-
-					//world.setBlock({ x, y, z });
+		for (float x = 0; x < 64; x+=1) {
+			for (float z = 0; z < 64; z+=1) {
+				//world.setBlock({ x+(z%2), y, z+(y%2)});
+				//world.setBlock({ x*y, y*z, z*x });
+				auto h = noise.getNoise(x/16, z/16)*8+10;
+				if (h < 0) {
+					continue;
+				}
+				for (int y = 0; y < h; y++) {
+					world.setBlock({ (int)x, (int)y, (int)z });
 				}
 			}
 		}
@@ -101,7 +104,7 @@ namespace cubecraft {
 		auto vertices = world.getMesh().getVertices();
 		auto verticesIndices = world.getMesh().getVer_Indices();
 
- 		TextureVBO = m_context.buildVBO(textureIndices.data(), textureIndices.size()*sizeof(GLuint));
+ 		TextureVBO  = m_context.buildVBO(textureIndices.data(), textureIndices.size()*sizeof(GLfloat));
 		VerticesVBO = m_context.buildVBO(vertices.data(), vertices.size()*sizeof(GLfloat));
 
 		VAO = m_context.buildVAO(VerticesVBO, TextureVBO);
@@ -109,7 +112,7 @@ namespace cubecraft {
 
 		shader = m_context.buildShader("Shader/shader.vert", "Shader/shader.frag");
 
-     		texture = LoadTexture("Resources/Texture/dirt.png");
+     	texture = LoadTexture("Resources/Texture/texture.png");
 	}
 	void CubeCraft::Loop() {
 		start = static_cast<float>(glfwGetTime());

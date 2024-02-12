@@ -134,6 +134,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Scr\Maths\Croods.cpp" />
+    <ClCompile Include="Scr\Maths\Noise.cpp" />
+    <ClCompile Include="Scr\Texture\TextureSegmentation.cpp" />
     <ClCompile Include="Scr\World\Block\Block.cpp" />
     <ClCompile Include="Scr\World\Chunk\ChunkMeshBuilder.cpp" />
     <ClCompile Include="D:\C++\CubeCraft\Cubecraft\glad.c" />
@@ -150,6 +152,8 @@
     <ClCompile Include="Scr\World\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scr\Maths\Noise.h" />
+    <ClInclude Include="Scr\Texture\TextureSegmentation.h" />
     <ClInclude Include="Scr\World\Block\Block.h" />
     <ClInclude Include="Scr\World\Chunk\ChunkMeshBuilder.h" />
     <ClInclude Include="Scr\Application.h" />
@@ -180,6 +184,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Texture\dirt.png" />
+    <Image Include="Resources\Texture\origin_grass_block_side.png" />
+    <Image Include="Resources\Texture\origin_grass_block_top.png" />
+    <Image Include="Resources\Texture\texture.png" />
     <Image Include="Resources\Texture\test.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

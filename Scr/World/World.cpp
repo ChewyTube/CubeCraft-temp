@@ -25,7 +25,7 @@ namespace cubecraft {
 		// @TODO 去重！！！
 		std::vector<GLfloat> vertices; // 顶点
 		std::vector<GLuint> vIndices; // 顶点索引
-		std::vector<GLuint> tIndices; // 纹理索引
+		std::vector<GLfloat> tIndices; // 纹理索引
 
 		for (auto& chunk : worldData) {
 			Mesh chunkMesh = chunk.second.getMesh();

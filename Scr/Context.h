@@ -15,10 +15,18 @@ namespace cubecraft {
 		Shader* buildShader(std::string vertPath, std::string fragPath);
 		//std::pair<int, int> buildVBO_VAO(float* vertices, int size);
 
-		GLuint buildVBO(GLfloat* data, GLint size);
-		GLuint buildVBO(GLuint* data, GLint size);
+		GLuint buildVBO(GLuint* data, GLuint size);
+		GLuint buildVBO(GLfloat* data,	GLuint size);
+		GLuint buildVBO(GLdouble* data, GLuint size);
+
 		GLuint buildVAO(GLuint VerticesVBO, GLuint TextureVBO);
 		GLuint buildEBO(GLuint* indices, GLint size, GLuint VAO);
+
+		/*
+		template<typename T>
+		GLuint buildVBO(T* data, GLuint size);
+		
+		*/
 	private:
 	};
 }

@@ -43,10 +43,10 @@ namespace cubecraft {
 	{ Point(0, 0, 0), Point(1, 0, 0), Point(1, 0, 1), Point(0, 0, 1)}
 	};
 
-	std::array<GLuint, 8> textureIndices = {
-		0, 0, 1, 0, 1, 1, 0, 1,
+	std::array<GLfloat, 8> _textureIndices = {
+		0, 0, 0.125, 0, 0.125, 0.125, 0, 0.125,
 	};
-	std::array<std::array<GLuint, 2>, 4> texturePoints = {
-		{{0, 0}, {1, 0}, {1, 1}, {0, 1}}
+	std::array<std::array<GLfloat, 2>, 4> texturePoints = {
+		{{0, 0}, {0.125, 0}, {0.125, 0.125}, {0, 0.125}}
 	};
 }

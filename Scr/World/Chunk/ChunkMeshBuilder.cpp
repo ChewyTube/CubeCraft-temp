@@ -13,7 +13,7 @@ namespace cubecraft {
 		// 通过区块数据合成一个顶点数据
 		std::vector<GLfloat> vertices;
 		std::vector<GLuint> vIndices;
-		std::vector<GLuint> tIndices;
+		std::vector<GLfloat> tIndices;
 
 		int addedFaces = 0;// 已添加的面数
 
@@ -65,11 +65,37 @@ namespace cubecraft {
 	void ChunkMeshBuilder::addFace(
 		std::vector<GLfloat>&	vertices,
 		std::vector<GLuint>&	vIndices, 
-		std::vector<GLuint>&	tIndices,
+		std::vector<GLfloat>&	tIndices,
 		Direction				dir, 
 		BlockCroodInChunk		pos, 
 		int&					addedFaces
 	) {
+		std::array<GLfloat, 8> textureIndices{};
+		switch (dir)
+		{
+		case cubecraft::up:
+			textureIndices = segmenter.getTexIndices({ 2, 0 });
+			break;
+		case cubecraft::down:
+			textureIndices = segmenter.getTexIndices({ 0, 0 });
+			break;
+		case cubecraft::left:
+			textureIndices = segmenter.getTexIndices({ 1, 0 });
+			break;
+		case cubecraft::right:
+			textureIndices = segmenter.getTexIndices({ 1, 0 });
+			break;
+		case cubecraft::front:
+			textureIndices = segmenter.getTexIndices({ 1, 0 });
+			break;
+		case cubecraft::back:
+			textureIndices = segmenter.getTexIndices({ 1, 0 });
+			break;
+		default:
+			textureIndices = segmenter.getTexIndices({ 0, 0 });
+			break;
+		}
+
 		// 添加索引
 		switch (dir)
 		{
@@ -290,8 +316,8 @@ namespace cubecraft {
 		}
 		return result;
 	}
-	std::vector<GLuint> ChunkMeshBuilder::getTIndicesfromPoints(Vertices& verticesPoints) {
-		std::vector<GLuint> result(verticesPoints.size() * 2);
+	std::vector<GLfloat> ChunkMeshBuilder::getTIndicesfromPoints(Vertices& verticesPoints) {
+		std::vector<GLfloat> result(verticesPoints.size() * 2);
 		for (auto& v : verticesPoints) {
 			result[v.second * 2 + 0] = v.first.t.x;
 			result[v.second * 2 + 1] = v.first.t.y;

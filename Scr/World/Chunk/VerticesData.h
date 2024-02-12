@@ -15,7 +15,7 @@ namespace cubecraft {
 	};
 	struct TextureCrood
 	{
-		GLuint x, y;
+		GLfloat x, y;
 	};
 	struct Vertex
 	{
@@ -65,6 +65,6 @@ namespace cubecraft {
 	extern std::array<Point, 4> topPoint;
 	extern std::array<Point, 4> bottomPoint;
 
-	extern std::array<GLuint, 8> textureIndices;
-	extern std::array<std::array<GLuint, 2>, 4> texturePoints;
+	extern std::array<GLfloat, 8> _textureIndices;
+	extern std::array<std::array<GLfloat, 2>, 4> texturePoints;
 }

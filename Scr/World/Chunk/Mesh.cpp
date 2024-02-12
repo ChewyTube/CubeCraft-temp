@@ -7,7 +7,7 @@ namespace cubecraft {
 	std::vector<GLuint> Mesh::getVer_Indices() {
 		return vIndices;
 	}
-	std::vector<GLuint> Mesh::getTex_Indices() {
+	std::vector<GLfloat> Mesh::getTex_Indices() {
 		return tIndices;
 	}
 }
