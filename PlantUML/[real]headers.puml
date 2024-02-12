@@ -4,38 +4,41 @@ object main{
     主函数
 }
 
-package Enviroment{
-    object glm{
-        线性代数库
-    }
-    object GLFW_GLAD{
-        你懂的
-    }
-    'glm -right-> GLFW_GLAD
-}
+'package Enviroment{
+'    object glm{
+'        线性代数库
+'    }
+'    object GLFW_GLAD{
+'        你懂的
+'    }
+'    'glm -right-> GLFW_GLAD
+'}
 
 package Scr{
-    package Log{
-        object Log{
-            日志输出
-        }
+    object Log{
+        日志输出
     }
-    package Maths{
-        object Croods{
-            坐标相关
-        }
+    object Croods{
+        坐标相关
     }
-    package Renderer{
-        object Renderer{
-            渲染相关
-        }
+    object Noise{
+        噪声类
     }
-    package Texture{
-        object Texture{
-            加载纹理
-        }
+    object Renderer{
+        渲染相关
+    }
+    object Texture{
+        加载纹理
+    }
+    object TextureSegmentation{
+        获取纹理索引
     }
     package World{
+        package Block{
+            object Block{
+                方块类
+            }
+        }
         package Chunk{
             object Chunk{
                 区块
@@ -50,7 +53,21 @@ package Scr{
                 构建Mesh时的必要数据
             }
         }
+        object World{
+            世界类
+        }
+        note right of World : World.h to ChunkMeshBuilder.cpp
     }
+    object E_BlockType{
+        定义方块
+    }
+    object E_Direction{
+        六个方向
+    }
+    object E_Usage{
+        定义操作的用处
+    }
+
     object Application{
         应用层
     }
@@ -69,30 +86,38 @@ package Scr{
     object Config{
         相关配置
     }
-}
 
-Maths -[hidden]- Log
-Log -[hidden]left- Texture
+}
 
 Application --> main
 CubeCraft --> Application
 
-Camera --> CubeCraft
-Config --> CubeCraft
-Texture --> CubeCraft
+World --> CubeCraft
+Noise -> CubeCraft
+Context --> CubeCraft
 Renderer --> CubeCraft
-Chunk -->CubeCraft
+E_BlockType -> CubeCraft
 
-Shader --> Context
+Chunk --> World
+E_Usage --> World
+
 Log --> Context
-CubeCraft --> Context
+Shader --> Context
 
-Log --> Texture
-
-Mesh --> Chunk
 ChunkMeshBuilder --> Chunk
 
-Croods -right-> ChunkMeshBuilder
+Mesh --> ChunkMeshBuilder
+Block --> ChunkMeshBuilder
+Croods --> ChunkMeshBuilder
+Texture --> ChunkMeshBuilder
+E_Direction -> ChunkMeshBuilder
 VerticesData --> ChunkMeshBuilder
+TextureSegmentation -> ChunkMeshBuilder
+
+World ..> ChunkMeshBuilder
+
+Shader --> Renderer
+Camera --> Renderer
+Config --> Renderer
 
 @enduml

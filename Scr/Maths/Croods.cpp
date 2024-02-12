@@ -23,24 +23,24 @@ namespace cubecraft {
 	}
 	*/
 	ChunkCroodInWorld getChunkCrood(BlockCroodInWorld c) {
-		auto x = (size_t)c.x / 16;
-		auto y = (size_t)c.y / 16;
-		auto z = (size_t)c.z / 16;
-		auto w = (size_t)c.w / 16;
+		auto x = (GLint64)c.x / 16;
+		auto y = (GLint64)c.y / 16;
+		auto z = (GLint64)c.z / 16;
+		auto w = (GLint64)c.w / 16;
 		return { x, y, z, w };
 	}
 	BlockCroodInChunk getBlockChunkCrood(BlockCroodInWorld c) {
-		auto x = (size_t)c.x % 16;
-		auto y = (size_t)c.y % 16;
-		auto z = (size_t)c.z % 16;
-		auto w = (size_t)c.w % 16;
+		auto x = (GLint64)c.x % 16;
+		auto y = (GLint64)c.y % 16;
+		auto z = (GLint64)c.z % 16;
+		auto w = (GLint64)c.w % 16;
 		return { x, y, z, w };
 	}
 	BlockCroodInWorld getBlockWorldCrood(BlockCroodInChunk c1, ChunkCroodInWorld c2) {
-		size_t x = c1.x + c2.x * 16;
-		size_t y = c1.y + c2.y * 16;
-		size_t z = c1.z + c2.z * 16;
-		size_t w = c1.w + c2.w * 16;
+		GLint64 x = c1.x + c2.x * 16;
+		GLint64 y = c1.y + c2.y * 16;
+		GLint64 z = c1.z + c2.z * 16;
+		GLint64 w = c1.w + c2.w * 16;
 		return{ x, y, z, w };
 	}
 }

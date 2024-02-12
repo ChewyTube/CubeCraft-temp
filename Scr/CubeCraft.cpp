@@ -84,9 +84,9 @@ namespace cubecraft {
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 		// 放置方块
-		for (float x = 0; x < 64; x+=1) {
-			for (float z = 0; z < 64; z+=1) {
-				auto h = noise.getNoise(x/16, z/16)*16+10;
+		for (float x = -32; x < 32; x+=1) {
+			for (float z = -32; z < 32; z+=1) {
+				auto h = noise.getNoise(x/16, z/16)*8+10;
 				if (h < 0) {
 					continue;
 				}

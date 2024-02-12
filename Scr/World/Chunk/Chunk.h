@@ -1,10 +1,7 @@
 ﻿#pragma once
 #include <unordered_map>
 
-#include "Mesh.h"
 #include "ChunkMeshBuilder.h"
-
-#include "../Block/Block.h"
 
 class World;
 namespace cubecraft {
@@ -28,7 +25,6 @@ namespace cubecraft {
 		bool empty();
 	private:
 		ChunkCroodInWorld m_crood;
-		//暂定为0无方块 1有方块
 		blockDataType blockData;
 		Mesh mesh;
 		ChunkMeshBuilder builder = ChunkMeshBuilder(nullptr, {});
