@@ -7,6 +7,7 @@
 #include "../Camera.h"
 
 #include "../Config.h"
+#include "../World/World.h"
 
 namespace cubecraft {
     class Renderer {
@@ -14,7 +15,7 @@ namespace cubecraft {
         void startRender();
         void endRender(GLFWwindow* window);
 
-        void render(Shader* shader, Camera camera, GLuint VAO);
+        void render(Shader* shader, Camera camera, GLuint VAO, World* world);
     private:
 
     };

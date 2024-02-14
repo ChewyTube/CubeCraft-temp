@@ -9,7 +9,6 @@
 namespace cubecraft{
 	using WorldDataType = std::unordered_map<ChunkCroodInWorld, Chunk, CroodHash, CroodEqual>;
 	
-
 	class World {
 	public:
 		World() {

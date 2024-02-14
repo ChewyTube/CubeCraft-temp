@@ -149,6 +149,8 @@
     <ClCompile Include="Scr\World\Chunk\Chunk.cpp" />
     <ClCompile Include="Scr\World\Chunk\Mesh.cpp" />
     <ClCompile Include="Scr\World\Chunk\VerticesData.cpp" />
+    <ClCompile Include="Scr\World\Generator\Features\Tree.cpp" />
+    <ClCompile Include="Scr\World\Generator\Terrain\TerrainGenerator.cpp" />
     <ClCompile Include="Scr\World\World.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +176,8 @@
     <ClInclude Include="Scr\World\Chunk\Chunk.h" />
     <ClInclude Include="Scr\World\Chunk\Mesh.h" />
     <ClInclude Include="Scr\World\Chunk\VerticesData.h" />
+    <ClInclude Include="Scr\World\Generator\Features\Tree.h" />
+    <ClInclude Include="Scr\World\Generator\Terrain\TerrainGenerator.h" />
     <ClInclude Include="Scr\World\World.h" />
     <ClInclude Include="stb_image.h" />
   </ItemGroup>
@@ -188,7 +192,10 @@
     <None Include="Shader\shader.vert" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Resources\Texture\azalea_leaves.png" />
     <Image Include="Resources\Texture\dirt.png" />
+    <Image Include="Resources\Texture\oak_log.png" />
+    <Image Include="Resources\Texture\oak_log_top.png" />
     <Image Include="Resources\Texture\origin_grass_block_side.png" />
     <Image Include="Resources\Texture\origin_grass_block_top.png" />
     <Image Include="Resources\Texture\texture.png" />

@@ -60,6 +60,25 @@ namespace cubecraft {
                 break;
             }
             break;
+        case cubecraft::Log:
+            switch (dir)
+            {
+            case cubecraft::up:
+            case cubecraft::down:
+                return { 0, 1 };
+                break;
+            case cubecraft::left:
+            case cubecraft::right:
+            case cubecraft::front:
+            case cubecraft::back:
+                return { 1, 1 };
+                break;
+            default:
+                return { 0, 0 };
+                break;
+            }
+        case cubecraft::Leave:
+            return { 2, 1 };
         default:
             return { 0, 0 };
             break;

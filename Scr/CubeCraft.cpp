@@ -84,18 +84,8 @@ namespace cubecraft {
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
 		// 放置方块
-		for (float x = -32; x < 32; x+=1) {
-			for (float z = -32; z < 32; z+=1) {
-				auto h = noise.getNoise(x/16, z/16)*8+10;
-				if (h < 0) {
-					continue;
-				}
-				world.setBlock({ (int)x, (int)h, (int)z }, Block(Grass));
-				for (int y = 0; y < h; y++) {
-					world.setBlock({ (int)x, (int)y, (int)z }, Block(Dirt));
-				}
-			}
-		}
+		int halfWidth = 32;
+		generator.generateWorld(-halfWidth, halfWidth, -halfWidth, halfWidth);
 		// 构建Mesh
 		world.buildWorldMesh();
 
@@ -132,24 +122,8 @@ namespace cubecraft {
 			processInput(window);
 
 			renderer.startRender();
-
-			// 为方便调试
-			//renderer.render(shader, camera, VAO);
 			glBindTexture(GL_TEXTURE_2D, texture);
-			shader->use();
-
-			glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, near, far);
-			shader->setMat4("projection", projection);
-			glm::mat4 view = camera.GetViewMatrix();
-			shader->setMat4("view", view);
-
-			auto points = world.getMesh().getVertices().size();
-			glm::mat4 model = glm::mat4(1.0f);
-			shader->setMat4("model", model);
-			glBindVertexArray(VAO);
-			glDrawElements(GL_TRIANGLES, points, GL_UNSIGNED_INT, 0);
-
-			// -------------------------------------------
+			renderer.render(shader, camera, VAO, &world);
 			renderer.endRender(window);
 		}
 		end = static_cast<float>(glfwGetTime());

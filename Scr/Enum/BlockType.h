@@ -5,5 +5,7 @@ namespace cubecraft {
 		None = -1,
 		Dirt = 0,
 		Grass,
+		Log,
+		Leave,
 	};
 }

@@ -66,6 +66,12 @@
     <ClCompile Include="Scr\Texture\TextureSegmentation.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Scr\World\Generator\Terrain\TerrainGenerator.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Scr\World\Generator\Features\Tree.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scr\Application.h">
@@ -140,6 +146,12 @@
     <ClInclude Include="Scr\Enum\Usage.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Scr\World\Generator\Terrain\TerrainGenerator.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Scr\World\Generator\Features\Tree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\shader.vert" />
@@ -165,6 +177,15 @@
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="Resources\Texture\origin_grass_block_top.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Resources\Texture\azalea_leaves.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Resources\Texture\oak_log.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Resources\Texture\oak_log_top.png">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

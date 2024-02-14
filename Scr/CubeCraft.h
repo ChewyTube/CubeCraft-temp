@@ -12,7 +12,7 @@
 #include "World/Chunk/Chunk.h"
 #include "Enum/BlockType.h"
 
-#include "Maths/Noise.h"
+#include "World/Generator/Terrain/TerrainGenerator.h"
 
 namespace cubecraft {
 	class CubeCraft {
@@ -32,6 +32,8 @@ namespace cubecraft {
 		GLuint VerticesVBO, TextureVBO;
 		World world;
 
-		PerlinNoise noise;
+		TerrainGenerator generator = TerrainGenerator(4.0f, 0.02f, 4.0f, 2.0f, 4, &world);
+		//PerlinNoise noise;
+
 	};
 }
